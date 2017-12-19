@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>first</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
+ 
+ 
+<%-- <link rel="stylesheet" type="text/css" href="<c:url value='/css/ui.css'/>" /> --%>
+
+	<!-- Bootstrap Core CSS -->
+    <link href="<c:url value='/vendor/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="<c:url value='/vendor/metisMenu/metisMenu.min.css'/>" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<c:url value='/css/sb-admin-2.css'/>" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="<c:url value='/vendor/morrisjs/morris.css'/>" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="<c:url value='/vendor/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/vendor/datatables-plugins/dataTables.bootstrap.css'/>" rel="stylesheet" type="text/css">
+    
+ 
+	<!-- jQuery -->
+	
+	<!-- jQuery -->
+    <script src="<c:url value='/vendor/jquery/jquery.min.js'/>"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<c:url value='/vendor/bootstrap/js/bootstrap.min.js'/>"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="<c:url value='/vendor/metisMenu/metisMenu.min.js'/>"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="<c:url value='/vendor/raphael/raphael.min.js'/>"></script>
+    <script src="<c:url value='/vendor/morrisjs/morris.min.js'/>"></script>    
+
+    <!-- Custom Theme JavaScript -->
+    <script src="<c:url value='/js/sb-admin-2.js'/>"></script>
+	<%-- <script src="<c:url value='/js/jquery.min.js'/>"></script> --%>
+	<script src="<c:url value='/js/common.js'/>" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+		 	$('.btn').on('click', function() {
+		        var $this = $(this);
+		      $this.button('loading');
+		        setTimeout(function() {
+		           $this.button('reset');	           
+		       }, 1000);	        
+		    });
+		});
+	</script>

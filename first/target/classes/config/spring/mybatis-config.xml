@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                               "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="defaultExecutorType" value="REUSE" />
+        <!-- <setting name="defaultExecutorType" value="BATCH" /> -->
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="first.common.common.BaseMap" alias="bMap" />
+        <typeAlias type="first.common.common.CollectionMap" alias="cMap" />
+    </typeAliases>
+
+    <!-- 개발용. -->
+    <mappers>
+        <mapper resource="mapper/sample/Common_SQL.xml" />
+        <mapper resource="mapper/sample/Menu_SQL.xml" />
+        <mapper resource="mapper/sample/Sample_SQL.xml" />    	
+    </mappers>
+
+</configuration>

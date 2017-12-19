@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="menu">
+ 	<select id="selectMenuList" parameterType="hashmap" resultType="hashmap">
+	    <![CDATA[
+	        SELECT
+	           A.IDX, 
+	           A.MENU_NAME, 
+	           A.MENU_ENAME, 
+	           A.PARENT_IDX, 
+	           A.MENU_IDX, 
+	           A.ICON, 
+	           A.CREA_DTM, 
+	           A.CREA_ID, 
+	           A.LINK, 
+	           A.USE_YN, 
+	           A.AUTH,
+               (SELECT COUNT(*) FROM TB_MENU B WHERE A.PARENT_IDX = B.PARENT_IDX AND A.MENU_IDX < B.MENU_IDX) AS SUBMENU_CNT
+	        FROM
+	            TB_MENU A
+	        WHERE
+	       		USE_YN = 'Y'
+	       	ORDER BY 
+	       		PARENT_IDX,
+	       		MENU_IDX
+	    ]]>
+	</select>	
+</mapper>
