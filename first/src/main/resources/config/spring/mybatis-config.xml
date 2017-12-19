@@ -9,7 +9,7 @@
         <setting name="defaultExecutorType" value="REUSE" />
         <!-- <setting name="defaultExecutorType" value="BATCH" /> -->
     </settings>
-
+	<!-- test  -->
     <typeAliases>
         <typeAlias type="first.common.common.BaseMap" alias="bMap" />
         <typeAlias type="first.common.common.CollectionMap" alias="cMap" />
