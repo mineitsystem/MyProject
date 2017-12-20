@@ -13,7 +13,7 @@ function ComSubmit(opt_formId) {
     this.formId = gfn_isNull(opt_formId) == true ? "commonForm" : opt_formId;
     this.url = "";
      
-    if(this.formId == "commonForm"){
+    if(this.formId == "commonForm"){    	
         $("#commonForm")[0].reset();
     }
      
@@ -21,8 +21,8 @@ function ComSubmit(opt_formId) {
         this.url = url;
     };
      
-    this.addParam = function addParam(key, value){
-        $("#"+this.formId).append($("<input type='hidden' name='"+key+"' id='"+key+"' value='"+value+"' >"));
+    this.addParam = function addParam(key, value){    	
+        $("#"+this.formId).html($("<input type='hidden' name='"+key+"' id='"+key+"' value='"+value+"' >"));
     };
      
     this.submit = function submit(){

@@ -85,7 +85,7 @@
         }
         
         function fn_downloadFile(obj){
-            var idx = obj.parent().find("#IDX").val();
+            var idx = obj.parent().find("#IDX").val();            
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='/common/downloadFile.do' />");
             comSubmit.addParam("IDX", idx);
