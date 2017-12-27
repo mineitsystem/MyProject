@@ -7,9 +7,20 @@ import org.springframework.stereotype.Repository;
 @Repository("LoginDAO")
 public class LoginDAO extends AbstractDAO{
 
-	public List<Map<String, Object>> getLoginInfo(List<Map<String, Object>> map) {
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> getLoginInfo(Map<String, Object> map) {
 		
-		return (List<Map<String, Object>>)selectList("login.selectLoginList", map);
+		return (Map<String, Object>) selectOne("login.selectLoginId", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> getLoginPass(Map<String, Object> map) {
+		
+		return (Map<String, Object>) selectOne("login.selectLoginPass", map);
+	}
+
+	public void updatePassErr(Map<String, Object> map) {
+		update("login.updatePassErr", map);
 	}
 
 }

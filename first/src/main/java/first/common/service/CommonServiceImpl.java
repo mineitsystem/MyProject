@@ -6,14 +6,14 @@ import javax.annotation.Resource;
  
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
- 
+
 import first.common.dao.CommonDAO;
  
-@Service("commonService")
+@Service("CommonService")
 public class CommonServiceImpl implements CommonService{
     Logger log = Logger.getLogger(this.getClass());
      
-    @Resource(name="commonDAO")
+    @Resource(name="CommonDAO")
     private CommonDAO commonDAO;
     
     @Override

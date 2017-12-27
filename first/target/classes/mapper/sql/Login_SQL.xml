@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="login">
+ 	<select id="selectLoginId" parameterType="hashmap" resultType="hashmap">
+	    <![CDATA[
+	        SELECT USER_ID,
+	         	   USER_NAME,
+	         	   PASS,
+	         	   EMAIL,
+	         	   PASS_ERR,
+	         	   AUTH FROM 
+	         	   TB_USER
+	         	   WHERE 1=1
+	    ]]>    	   
+       	<if test="!@first.common.util.MyComparator@isEmpty(id)">
+			<![CDATA[
+				AND USER_ID = #{id}
+			]]>
+		</if>	    
+  
+	    
+	</select>	
+	
+	<select id="selectLoginPass" parameterType="hashmap" resultType="hashmap">
+	    <![CDATA[
+	        SELECT COUNT(*) AS PASSCNT FROM 
+	         	   TB_USER
+	         	   WHERE 1=1	         	   
+	         	   
+	    ]]>    	   
+       	<if test="!@first.common.util.MyComparator@isEmpty(password)">
+			<![CDATA[
+				AND USER_ID = #{id}
+				AND PASS = #{password}
+			]]>
+		</if>	    
+  
+	    
+	</select>
+	
+	<update id="updatePassErr" parameterType="hashmap" >
+	    
+	        UPDATE TB_USER 
+	            SET 
+	            <if test="ERRTYPE == false">
+	            	<![CDATA[
+	            		PASS_ERR = PASS_ERR+1
+	            	]]> 
+	            </if>
+	            <if test="ERRTYPE == true">
+	            	<![CDATA[
+	            		PASS_ERR = 0
+	            	]]> 
+	            </if>	        	
+	         	WHERE 1=1	         	   	         	   
+       	<if test="!@first.common.util.MyComparator@isEmpty(id)">
+			<![CDATA[
+				AND USER_ID = #{id}
+			]]>
+		</if>	    
+  
+	    
+	</update>
+</mapper>

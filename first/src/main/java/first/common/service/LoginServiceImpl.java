@@ -16,8 +16,18 @@ public class LoginServiceImpl extends BaseService implements LoginService {
     private LoginDAO lDao;
 
 	@Override
-	public List<Map<String, Object>> getLoginInfo(List<Map<String, Object>> map) throws Exception {
+	public Map<String, Object> getLoginInfo(Map<String, Object> map) throws Exception {
 		return lDao.getLoginInfo(map);
+	}
+
+	@Override
+	public Map<String, Object> getLoginPass(Map<String, Object> map) {
+		return lDao.getLoginPass(map);
+	}
+
+	@Override
+	public void updatePassErr(Map<String, Object> map) throws Exception {
+		lDao.updatePassErr(map);		
 	}
 
 }

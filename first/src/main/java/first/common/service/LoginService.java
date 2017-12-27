@@ -5,6 +5,10 @@ import java.util.Map;
 
 public interface LoginService {
 	
-	public List<Map<String, Object>> getLoginInfo(List<Map<String, Object>> map) throws Exception;
+	public Map<String, Object> getLoginInfo(Map<String, Object> map) throws Exception;
+
+	public Map<String, Object> getLoginPass(Map<String, Object> map) throws Exception;
+
+	public void updatePassErr(Map<String, Object> map) throws Exception;
 	
 }

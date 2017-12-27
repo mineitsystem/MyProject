@@ -1,4 +1,4 @@
-package first.common.common;
+package first.common.dto;
  
 import java.util.HashMap;
 import java.util.Map;

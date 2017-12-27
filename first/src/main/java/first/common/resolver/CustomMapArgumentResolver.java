@@ -9,8 +9,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
- 
-import first.common.common.CommandMap;
+
+import first.common.dto.CommandMap;
  
 public class CustomMapArgumentResolver implements HandlerMethodArgumentResolver{
     @Override

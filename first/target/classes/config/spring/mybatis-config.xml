@@ -11,15 +11,16 @@
     </settings>
 	<!-- test  -->
     <typeAliases>
-        <typeAlias type="first.common.common.BaseMap" alias="bMap" />
-        <typeAlias type="first.common.common.CollectionMap" alias="cMap" />
+        <typeAlias type="first.common.dto.BaseMap" alias="bMap" />
+        <typeAlias type="first.common.dto.CollectionMap" alias="cMap" />
     </typeAliases>
 
     <!-- 개발용. -->
     <mappers>
         <mapper resource="mapper/sql/Common_SQL.xml" />
         <mapper resource="mapper/sql/Menu_SQL.xml" />
-        <mapper resource="mapper/sql/Community_SQL.xml" />    	
+        <mapper resource="mapper/sql/Community_SQL.xml" />
+        <mapper resource="mapper/sql/Login_SQL.xml" />     	
     </mappers>
 
 </configuration>

@@ -13,13 +13,13 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" name="commonForm" id="commonForm">
+                        <form role="form" name="frm" id="frm">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" onkeypress="goLogin(event)" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -29,7 +29,7 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="button" class="btn btn-lg btn-success btn-block" onclick="goLogin()" value="Login"/><br/>
                                 <div style="width:100%;text-align:right;">
-                                	<input type="button" class="btn btn-difault btn-xs" value="회원가입" />
+                                	<input type="button" class="btn btn-difault btn-xs" value="Sign In" />
                                 </div>
                             </fieldset>
                         </form>
@@ -41,13 +41,56 @@
 	<script type="text/javascript">
 	//함수 선언부
 	
-	var goLogin = function(){
+	var goLogin = function(e){
+		if(e){
+			if (e.keyCode != 13) {		
+		        return false;
+			}
+		}
+				
 		if(!validationChk())return;
-		
-		 var comSubmit = new ComSubmit();
-         comSubmit.setUrl("<c:url value='/login/goLoginCheck.do' />");
-         comSubmit.submit();		
+		 
+		var comAjax = new ComAjax("frm");
+        comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
+        comAjax.setCallback("fn_selectLoginCallBack");
+        comAjax.ajax();
+			
 	}
+	
+	function fn_selectLoginCallBack(data){
+        var type = data.L_TYPE;
+        var msg = data.L_MSG;
+        var f_id = $("input[name='id']");
+        var f_password = $("input[name='password']");
+        
+        if(type === 1){
+        	location.href = "${pageContext.request.contextPath}/community/openBoardList.do";       
+        }else{        	
+        	switch(type){
+        		case 2://아이디 다름 
+        			f_id.val("");
+        			f_password.val("");
+        			f_id.focus();        			
+        			break;
+        		case 3://비밀번호 다름 
+        			f_password.val("");
+        			f_password.focus();
+            		break;
+        		case 4: //비밀번호 오류횟수가 초과
+        			f_id.val("");
+        			f_password.val("");
+        			f_id.focus();
+            		break; 
+        		case 4: //기타에러
+        			f_id.val("");
+        			f_password.val("");
+        			f_id.focus();
+            		break; 
+        	}
+        	modalAlert("알림",msg);	
+        }        
+       
+    }
 	
 	validationChk = function(){
 		// 사용자 ID 필수체크

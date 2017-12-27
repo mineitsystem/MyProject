@@ -7,7 +7,7 @@
  *  ---------------------------------------------------------------
  *  ver1.0      2013. 07. 01.   아무개              최초 작성
  */
-package first.common.common;
+package first.common.dto;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;

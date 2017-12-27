@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import first.common.common.CommandMap;
+import first.common.dto.CommandMap;
 import first.common.service.CommonService;
 
  
@@ -20,7 +20,7 @@ import first.common.service.CommonService;
 public class CommonController {
     Logger log = Logger.getLogger(this.getClass());
      
-    @Resource(name="commonService")
+    @Resource(name="CommonService")
     private CommonService commonService;
     
     @RequestMapping(value="/common/downloadFile.do")

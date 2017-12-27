@@ -9,7 +9,7 @@
  *  ---------------------------------------------------------------
  *  ver1.0      2016. 02. 03.   yeo         최초 작성
  */
-package first.common.common;
+package first.common.dto;
 
 import java.util.HashMap;
 
