@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface SampleService {
+public interface CommunityService {
 
 	Map<String, Object> selectBoardList(Map<String, Object> map) throws Exception;	
 

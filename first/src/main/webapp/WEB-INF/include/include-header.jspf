@@ -57,5 +57,38 @@
 		           $this.button('reset');	           
 		       }, 1000);	        
 		    });
+		 	
+		 	$('#modal_content').on('hidden', function() {
+		 	    $(this).removeData('modal');
+		 	});
 		});
 	</script>
+
+	<!-- 
+	alert-success  green
+
+	alert-info     blue
+
+	alert-warning  yellow
+
+	alert-danger   red 
+	-->
+	<div class="modal fade" id="modal_content" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header" id="modal_header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                     <h4 class="modal-title" id="modal_title"></h4>
+                 </div>
+                 <div class="modal-body" id="modal_body">
+                     
+                 </div>
+                 <div class="modal-footer">
+                 	 <button type="button" class="btn btn-primary" id="modal_confirm" data-dismiss="modal">확인</button>
+                     <!-- <button type="button" class="btn btn-default" id="modal_close" data-dismiss="modal">취소</button> -->                     
+                 </div>
+             </div>
+             <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+     </div>

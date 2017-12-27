@@ -15,20 +15,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import first.common.common.CommandMap;
-import first.community.service.SampleService;
+import first.community.service.CommunityService;
 
 @Controller
-@RequestMapping(value="/sample")
-public class SampleController {
+@RequestMapping(value="/community")
+public class CommnunityController {
 		
 	Logger log = Logger.getLogger(this.getClass());
 	
-	@Resource(name="sampleService")
-	private SampleService sampleService;
+	@Resource(name="CommunityService")
+	private CommunityService communityService;
 		
 	@RequestMapping(value="/openTilesView.do")
     public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv) throws Exception{
-		mv.setViewName("/sample/boardList");
+		mv.setViewName("/community/boardList");
     	
     	//Map<String,Object> resultMap = sampleService.selectBoardList(commandMap.getMap());
          
@@ -38,10 +38,10 @@ public class SampleController {
     }
 	
 	@RequestMapping(value="/openBoardList.do")
-    public ModelAndView openSampleBoardEgovList(CommandMap commandMap) throws Exception{
-    	ModelAndView mv = new ModelAndView("/sample/boardList");
+    public ModelAndView openCommunityBoardEgovList(CommandMap commandMap) throws Exception{
+    	ModelAndView mv = new ModelAndView("/community/boardList");
     	
-    	Map<String,Object> resultMap = sampleService.selectBoardList(commandMap.getMap());
+    	Map<String,Object> resultMap = communityService.selectBoardList(commandMap.getMap());
          
 	    mv.addObject("paginationInfo", (PaginationInfo)resultMap.get("paginationInfo"));
 	    mv.addObject("list", resultMap.get("result"));
@@ -51,9 +51,9 @@ public class SampleController {
 
 	@RequestMapping(value="/openBoardDetail.do")
 	public ModelAndView openBoardDetail(CommandMap commandMap) throws Exception{
-	    ModelAndView mv = new ModelAndView("/sample/boardDetail");
+	    ModelAndView mv = new ModelAndView("/community/boardDetail");
 	     
-	    Map<String,Object> map = sampleService.selectBoardDetail(commandMap.getMap());
+	    Map<String,Object> map = communityService.selectBoardDetail(commandMap.getMap());
 	    mv.addObject("map", map.get("map"));
 	    mv.addObject("list", map.get("list"));
 	     
@@ -62,25 +62,25 @@ public class SampleController {
 
 	@RequestMapping(value="/openBoardWrite.do")
 	public ModelAndView openBoardWrite(CommandMap commandMap) throws Exception{
-	    ModelAndView mv = new ModelAndView("/sample/boardWrite");
+	    ModelAndView mv = new ModelAndView("/community/boardWrite");
 	     
 	    return mv;
 	}
 	
 	@RequestMapping(value="/insertBoard.do")
 	public ModelAndView insertBoard(CommandMap commandMap, HttpServletRequest request) throws Exception{
-	    ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
+	    ModelAndView mv = new ModelAndView("redirect:/community/openBoardList.do");
 	     
-	    sampleService.insertBoard(commandMap.getMap(), request);
+	    communityService.insertBoard(commandMap.getMap(), request);
 	     
 	    return mv;
 	}
 	
 	@RequestMapping(value="/openBoardUpdate.do")
 	public ModelAndView openBoardUpdate(CommandMap commandMap) throws Exception{
-	    ModelAndView mv = new ModelAndView("/sample/boardUpdate");
+	    ModelAndView mv = new ModelAndView("/community/boardUpdate");
 	     
-	    Map<String,Object> map = sampleService.selectBoardDetail(commandMap.getMap());
+	    Map<String,Object> map = communityService.selectBoardDetail(commandMap.getMap());
 	    mv.addObject("map", map.get("map"));
 	    mv.addObject("list", map.get("list"));
 	     
@@ -89,9 +89,9 @@ public class SampleController {
 	
 	@RequestMapping(value="/updateBoard.do")
 	public ModelAndView updateBoard(CommandMap commandMap, HttpServletRequest request) throws Exception{
-	    ModelAndView mv = new ModelAndView("redirect:/sample/openBoardDetail.do");
+	    ModelAndView mv = new ModelAndView("redirect:/community/openBoardDetail.do");
 	     
-	    sampleService.updateBoard(commandMap.getMap(), request);
+	    communityService.updateBoard(commandMap.getMap(), request);
 	     
 	    mv.addObject("IDX", commandMap.get("IDX"));
 	    return mv;
@@ -99,9 +99,9 @@ public class SampleController {
 	
 	@RequestMapping(value="/deleteBoard.do")
 	public ModelAndView deleteBoard(CommandMap commandMap) throws Exception{
-	    ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
+	    ModelAndView mv = new ModelAndView("redirect:/community/openBoardList.do");
 	     
-	    sampleService.deleteBoard(commandMap.getMap());
+	    communityService.deleteBoard(commandMap.getMap());
 	     
 	    return mv;
 	}

@@ -17,8 +17,8 @@
         <put-attribute name="footer" value="" />
     </definition>
  
-    <definition name="/sample/*" extends=".root">
-	  <put-attribute name="body" value="/WEB-INF/jsp/sample/{1}.jsp" />
+    <definition name="/community/*" extends=".root">
+	  <put-attribute name="body" value="/WEB-INF/jsp/community/{1}.jsp" />
 	</definition>
 	<definition name="/login/*" extends=".login">
 	  <put-attribute name="body" value="/WEB-INF/jsp/login/login.jsp" />

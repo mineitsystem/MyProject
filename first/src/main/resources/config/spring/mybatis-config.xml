@@ -17,9 +17,9 @@
 
     <!-- 개발용. -->
     <mappers>
-        <mapper resource="mapper/sample/Common_SQL.xml" />
-        <mapper resource="mapper/sample/Menu_SQL.xml" />
-        <mapper resource="mapper/sample/Sample_SQL.xml" />    	
+        <mapper resource="mapper/sql/Common_SQL.xml" />
+        <mapper resource="mapper/sql/Menu_SQL.xml" />
+        <mapper resource="mapper/sql/Community_SQL.xml" />    	
     </mappers>
 
 </configuration>

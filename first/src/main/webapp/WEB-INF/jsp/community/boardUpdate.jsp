@@ -90,19 +90,19 @@
          
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
+            comSubmit.setUrl("<c:url value='/community/openBoardList.do' />");
             comSubmit.submit();
         }
          
         function fn_updateBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='/sample/updateBoard.do' />");
+            comSubmit.setUrl("<c:url value='/community/updateBoard.do' />");
             comSubmit.submit();
         }
          
         function fn_deleteBoard(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/deleteBoard.do' />");
+            comSubmit.setUrl("<c:url value='/community/deleteBoard.do' />");
             comSubmit.addParam("IDX", $("#IDX").val());
             comSubmit.submit();
              

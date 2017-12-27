@@ -74,13 +74,13 @@
         
         function fn_openBoardList(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
+            comSubmit.setUrl("<c:url value='/community/openBoardList.do' />");
             comSubmit.submit();
         }
         
         function fn_insertBoard(){
             var comSubmit = new ComSubmit("frm");
-            comSubmit.setUrl("<c:url value='/sample/insertBoard.do' />");
+            comSubmit.setUrl("<c:url value='/community/insertBoard.do' />");
             comSubmit.submit();
         }
         

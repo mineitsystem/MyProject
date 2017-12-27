@@ -46,7 +46,7 @@ CREATE TABLE `tb_menu` (
 
 LOCK TABLES `tb_menu` WRITE;
 /*!40000 ALTER TABLE `tb_menu` DISABLE KEYS */;
-INSERT INTO `tb_menu` VALUES (1,'메인','Main',0,0,'fa fa-star','2017-11-30 14:24:33','admin','/','Y','U'),(2,'커뮤니티','Cummunity',1,0,'fa fa-comments-o','2017-11-30 14:33:10','admin','/sample/openBoardList.do','Y','U'),(3,'관리자 페이지','Management',99,0,'fa fa-gear','2017-11-30 14:39:58','admin','/admin','Y','M'),(4,'예제','Example',2,0,'fa fa-pencil','2017-11-30 14:46:28','admin','/example','Y','M'),(5,'Sub1','Sub1',2,1,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub1','Y','M'),(6,'Sub2','Sub2',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub2','Y','M'),(7,'Sub3','Sub3',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub3','Y','M');
+INSERT INTO `tb_menu` VALUES (1,'메인','Main',0,0,'fa fa-star','2017-11-30 14:24:33','admin','/','Y','U'),(2,'커뮤니티','Cummunity',1,0,'fa fa-comments-o','2017-11-30 14:33:10','admin','/community/openBoardList.do','Y','U'),(3,'관리자 페이지','Management',99,0,'fa fa-gear','2017-11-30 14:39:58','admin','/admin','Y','M'),(4,'예제','Example',2,0,'fa fa-pencil','2017-11-30 14:46:28','admin','/example','Y','M'),(5,'Sub1','Sub1',2,1,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub1','Y','M'),(6,'Sub2','Sub2',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub2','Y','M'),(7,'Sub3','Sub3',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub3','Y','M');
 /*!40000 ALTER TABLE `tb_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

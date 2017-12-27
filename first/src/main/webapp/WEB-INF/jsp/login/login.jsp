@@ -13,7 +13,7 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" name="commonForm" id="commonForm">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
@@ -27,7 +27,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="button" class="btn btn-lg btn-success btn-block" onclick="validationChk()" value="Login"/><br/>
+                                <input type="button" class="btn btn-lg btn-success btn-block" onclick="goLogin()" value="Login"/><br/>
                                 <div style="width:100%;text-align:right;">
                                 	<input type="button" class="btn btn-difault btn-xs" value="회원가입" />
                                 </div>
@@ -41,10 +41,28 @@
 	<script type="text/javascript">
 	//함수 선언부
 	
+	var goLogin = function(){
+		if(!validationChk())return;
+		
+		 var comSubmit = new ComSubmit();
+         comSubmit.setUrl("<c:url value='/login/goLoginCheck.do' />");
+         comSubmit.submit();		
+	}
+	
 	validationChk = function(){
-		//$().val.isBlank
-			
-		location.href="${pageContext.request.contextPath}"+"/sample/openBoardList.do";
+		// 사용자 ID 필수체크
+		if($("input[name='id']").val().isBlank()) {	
+			modalAlert("알림","아이디를 입력해주세요");			
+			$("input[name='id']").focus(); 
+            return false;
+        }
+		// 사용자 PASSWORD 필수체크
+		if($("input[name='password']").val().isBlank()) {
+			modalAlert("알림","비밀번호를 입력해주세요");			
+			$("input[name='password']").focus();
+            return false;
+        }
+        return true;		
 	}
 	
 	setCookie = function(cookieName, value, exdays){
@@ -104,4 +122,5 @@
 	});
 		
 	</script>
+	
 </body>

@@ -7,52 +7,52 @@ import org.springframework.stereotype.Repository;
 
 import first.common.dao.AbstractDAO;
 
-@Repository("sampleDAO")
-public class SampleDAO extends AbstractDAO{
+@Repository("CommunityDAO")
+public class CommunityDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectBoardList(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>)selectPagingEgovList("sample.selectBoardList", map);
+		return (Map<String, Object>)selectPagingEgovList("community.selectBoardList", map);
 	}	
 
 	public void insertBoard(Map<String, Object> map) throws Exception {
-		insert("sample.insertBoard", map);
+		insert("community.insertBoard", map);
 	}
 	
 	public void updateHitCnt(Map<String, Object> map) throws Exception{
-	    update("sample.updateHitCnt", map);
+	    update("community.updateHitCnt", map);
 	}
 	 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception{
-	    return (Map<String, Object>) selectOne("sample.selectBoardDetail", map);
+	    return (Map<String, Object>) selectOne("community.selectBoardDetail", map);
 	}
 
 	public void updateBoard(Map<String, Object> map) throws Exception {
-		 update("sample.updateBoard", map);
+		 update("community.updateBoard", map);
 		
 	}
 
 	public void deleteBoard(Map<String, Object> map) throws Exception {
-		 update("sample.deleteBoard", map);
+		 update("community.deleteBoard", map);
 	}
 
 	public void insertFile(Map<String, Object> map) throws Exception {
-		insert("sample.insertFile", map);
+		insert("community.insertFile", map);
 		
 	}
 	
 	public void deleteFileList(Map<String, Object> map) throws Exception{
-	    update("sample.deleteFileList", map);
+	    update("community.deleteFileList", map);
 	}
 	 
 	public void updateFile(Map<String, Object> map) throws Exception{
-	    update("sample.updateFile", map);
+	    update("community.updateFile", map);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectFileList(Map<String, Object> map) {
-		return (List<Map<String, Object>>)selectList("sample.selectFileList", map);
+		return (List<Map<String, Object>>)selectList("community.selectFileList", map);
 	}
 
 }

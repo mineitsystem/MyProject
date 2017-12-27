@@ -97,20 +97,20 @@
          
         function fn_openBoardWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/openBoardWrite.do' />");
+            comSubmit.setUrl("<c:url value='/community/openBoardWrite.do' />");
             comSubmit.submit();
         }
          
         function fn_openBoardDetail(obj){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/openBoardDetail.do' />");
+            comSubmit.setUrl("<c:url value='/community/openBoardDetail.do' />");
             comSubmit.addParam("IDX", obj.parent().find("#IDX").val());
             comSubmit.submit();
         }
         
         function fn_search(pageNo){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/sample/openBoardList.do' />");
+            comSubmit.setUrl("<c:url value='/community/openBoardList.do' />");
             comSubmit.addParam("currentPageNo", pageNo);
             comSubmit.submit();
         }
