@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<http auto-config='true' use-expressions="true">
+		<intercept-url pattern="/login/login.do" access="isAnonymous()" />
+		<intercept-url pattern="/login/login.do" access="isAnonymous()" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!-- 
+		role 
+		<intercept-url pattern="..." access="hasRole('ROLE_ANONYMOUS')" />
+        <intercept-url pattern="..." access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="..." access="hasRole('ROLE_ADMIN')" /> 
+        -->
+        <!--
+        	login-page= 사용자 로그인 페이지
+        	default-target-url= 로그인 성공후 이동할 페이지
+        	authentication-failure-url= 로그인 실패후 페이지
+          -->
+		<form-login login-page="/login/login.do" default-target-url="/community/openBoardList.do"
+			username-parameter="id" password-parameter="password"
+			authentication-failure-url="/login/login.do" always-use-default-target='true' />
+
+		<logout invalidate-session="true" logout-url="/community/openBoardList.do"
+			logout-success-url="j_spring_security_logout" />
+		<!-- enable csrf protection -->
+		<csrf />
+	</http>
+	<authentication-manager>
+		<authentication-provider user-service-ref="LoginController" />
+	</authentication-manager>
+	<beans:bean id="LoginController" class="first.common.controller.LoginController">
+	</beans:bean>
+</beans:beans>
+

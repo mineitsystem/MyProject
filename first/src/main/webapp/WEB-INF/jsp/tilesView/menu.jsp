@@ -18,8 +18,7 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <c:forEach var="main" items="${LEFT_MENU}">
-                        	  
+                        <c:forEach var="main" items="${LEFT_MENU}">                        	  
                                 <c:if test="${main.MENU_IDX eq 0}">
                                 	<li>
 	                                	<!--메인  -->	                                	
@@ -29,40 +28,37 @@
 	                                			<span class="fa arrow"></span>
 	                                		</c:if>
 	                                	</a>
-                                	    <c:if test="${main.SUBMENU_CNT > 0}">
-                                	    
-	                                	    <ul class="nav nav-second-level">
-	                                	                           	
-			                                	<c:forEach var="sub1" items="${LEFT_MENU}">
-				                        		
-					                        		<c:if test="${main.PARENT_IDX eq sub1.PARENT_IDX and sub1.MENU_IDX eq 1}"> 					                        			
-				                        				<li>
-					                                    	<a href="<c:url value='${sub1.LINK}'/>">${sub1.MENU_NAME}
-					                                    		<c:if test="${sub1.SUBMENU_CNT > 0}">
-						                                			<!-- 서브의 서브 메뉴 존재 여부  -->
-						                                			<span class="fa arrow"></span>
-						                                		</c:if>
-					                                    	</a>					                               			                        					                        			
-				                        					<!-- 첫번째 서브  -->
-				                        		            <c:if test="${sub1.SUBMENU_CNT > 0}">
-				                        		            
-							                                	<ul class="nav nav-third-level">
-							                                	
-								                       			    <c:forEach var="sub2" items="${LEFT_MENU}">
-								                       			    
-								                        				<c:if test="${sub1.PARENT_IDX eq sub2.PARENT_IDX and sub2.MENU_IDX eq 2}">  
-								                        					<!-- 두번째 서브  -->				                        														                                    										                                   
-									                                        <li>
-									                                            <a href="<c:url value='${sub2.LINK}'/>">${sub2.MENU_NAME}</a>
-									                                        </li>								                                      
-											                                    							                                    								                               							                        					
-								                        				</c:if>
-								                        				
-								                       				</c:forEach>							                       				
-							                       				</ul>	
-						                                	</c:if>           			    
-					                       				 </li>			                        			
-					                        		</c:if>				                        		                    
+                                	    <c:if test="${main.SUBMENU_CNT > 0}">                                	   
+	                                	    <ul class="nav nav-second-level">	                                	                           
+			                                	<c:forEach var="sub1" items="${LEFT_MENU}">				                        		
+						                        		<c:if test="${main.PARENT_IDX eq sub1.PARENT_IDX and sub1.MENU_IDX eq 1}"> 					                        			
+					                        				<li>
+						                                    	<a href="<c:url value='${sub1.LINK}'/>">${sub1.MENU_NAME}
+						                                    		<c:if test="${sub1.SUBMENU_CNT > 0}">
+							                                			<!-- 서브의 서브 메뉴 존재 여부  -->
+							                                			<span class="fa arrow"></span>
+							                                		</c:if>
+						                                    	</a>					                               			                        					                        			
+					                        					<!-- 첫번째 서브  -->
+					                        		            <c:if test="${sub1.SUBMENU_CNT > 0}">
+					                        		            
+								                                	<ul class="nav nav-third-level">
+								                                	
+									                       			    <c:forEach var="sub2" items="${LEFT_MENU}">
+									                       			    
+									                        				<c:if test="${sub1.PARENT_IDX eq sub2.PARENT_IDX and sub2.MENU_IDX eq 2}">  
+									                        					<!-- 두번째 서브  -->				                        														                                    										                                   
+										                                        <li>
+										                                            <a href="<c:url value='${sub2.LINK}'/>">${sub2.MENU_NAME}</a>
+										                                        </li>								                                      
+												                                    							                                    								                               							                        					
+									                        				</c:if>
+									                        				
+									                       				</c:forEach>							                       				
+								                       				</ul>	
+							                                	</c:if>           			    
+						                       				 </li>			                        			
+						                        		</c:if>				                        		                    
 				                        		</c:forEach> 
 			                        		</ul>
                                 	    </c:if> 

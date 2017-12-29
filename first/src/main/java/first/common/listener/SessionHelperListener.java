@@ -145,8 +145,7 @@ public class SessionHelperListener implements HttpSessionBindingListener {
             if (session != null) {
                 session.invalidate();
             }
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
     public void valueBound(HttpSessionBindingEvent event) {

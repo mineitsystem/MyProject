@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import first.common.dto.CommandMap;
+import first.common.util.ScreenResolver;
 import first.community.service.CommunityService;
 
 @Controller
@@ -26,23 +27,14 @@ public class CommnunityController {
 	@Resource(name="CommunityService")
 	private CommunityService communityService;
 		
-	@RequestMapping(value="/openTilesView.do")
-    public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv) throws Exception{
-		mv.setViewName("/community/boardList");
-    	
-    	//Map<String,Object> resultMap = sampleService.selectBoardList(commandMap.getMap());
-         
-	    //mv.addObject("paginationInfo", (PaginationInfo)resultMap.get("paginationInfo"));
-	    //mv.addObject("list", resultMap.get("result"));    	
-    	return mv;
-    }
-	
 	@RequestMapping(value="/openBoardList.do")
     public ModelAndView openCommunityBoardEgovList(CommandMap commandMap) throws Exception{
     	ModelAndView mv = new ModelAndView("/community/boardList");
     	
     	Map<String,Object> resultMap = communityService.selectBoardList(commandMap.getMap());
          
+    	
+    	mv.addObject("setHeader", ScreenResolver.resolve(this));
 	    mv.addObject("paginationInfo", (PaginationInfo)resultMap.get("paginationInfo"));
 	    mv.addObject("list", resultMap.get("result"));
     	

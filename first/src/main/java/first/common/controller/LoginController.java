@@ -26,10 +26,9 @@ public class LoginController {
 	@Resource(name="LoginService")
 	private LoginService loginService;
 	
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value= {"/login","/login.do"})
     public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv) throws Exception{
 		mv.setViewName("/login/login");
-
     	return mv;
     }
 	

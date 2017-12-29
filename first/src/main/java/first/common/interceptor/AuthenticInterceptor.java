@@ -142,9 +142,9 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
         if (contextPath != null && !"".equals(contextPath)) 
             requestURI = StringUtils.replace(requestURI, contextPath, "");
         
-        if (requestURI.startsWith("/fdown/"))		return;
-        if (requestURI.startsWith("/zipfdown/"))		return;
-        if (requestURI.startsWith("/exception"))	return;
+        if (requestURI.startsWith("/fdown/"))		        return;
+        if (requestURI.startsWith("/zipfdown/"))		    return;
+        if (requestURI.startsWith("/exception"))	        return;
         if (requestURI.startsWith("/common/downloadFile"))	return;
         
         

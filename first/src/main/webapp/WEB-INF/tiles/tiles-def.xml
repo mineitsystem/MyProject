@@ -4,12 +4,14 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
  
 <tiles-definitions>
+
     <definition name=".root" template="/WEB-INF/jsp/tileLayout/baseLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
         <put-attribute name="menu" value="/WEB-INF/jsp/tilesView/menu.jsp" />        
         <put-attribute name="footer" value="/WEB-INF/jsp/tilesView/footer.jsp" />
     </definition>
+    
     <definition name=".login" template="/WEB-INF/jsp/tileLayout/loginLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
@@ -17,10 +19,20 @@
         <put-attribute name="footer" value="" />
     </definition>
  
-    <definition name="/community/*" extends=".root">
-	  <put-attribute name="body" value="/WEB-INF/jsp/community/{1}.jsp" />
+ 	<definition name="/login/*" extends=".login">
+	  <put-attribute name="body" value="/WEB-INF/jsp/login/{1}.jsp" />
 	</definition>
-	<definition name="/login/*" extends=".login">
-	  <put-attribute name="body" value="/WEB-INF/jsp/login/login.jsp" />
+ 	
+    <definition name="/*/*" extends=".root">
+	  <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />
 	</definition>
+	
+	<!-- <definition name="/admin/*" extends=".root">
+	  <put-attribute name="body" value="/WEB-INF/jsp/admin/{1}.jsp" />
+	</definition>
+	
+	<definition name="/main/*" extends=".root">
+	  <put-attribute name="body" value="/WEB-INF/jsp/main/{1}.jsp" />
+	</definition> -->
+		
 </tiles-definitions>

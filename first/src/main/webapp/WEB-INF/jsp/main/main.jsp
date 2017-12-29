@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 깃허브 push 테스트  -->
+	<div class="col-lg-12">	 	
+	    <div class="panel-body">
+	    	 메인 페이지 테스트
+	    </div>
+	</div>
 </body>
 </html>

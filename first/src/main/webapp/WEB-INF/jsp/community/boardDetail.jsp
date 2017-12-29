@@ -38,7 +38,7 @@
 			                        <a href="#this" name="file">${row.ORIGINAL_FILE_NAME }</a>
 			                        (${row.FILE_SIZE }kb)
 			                        </p>
-			              </c:forEach>                                              
+			                </c:forEach>                                              
                         </div>
                         <div class="form-group">   
                         	  <button class="btn btn-default" class="btn" id="list">목록으로</button>
