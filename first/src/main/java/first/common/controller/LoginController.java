@@ -35,8 +35,14 @@ public class LoginController {
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/goLoginCheck.do")
     public ModelAndView goLoginCheck(HttpServletRequest request, CommandMap commandMap, ModelAndView mv) throws Exception{
+		
     	mv.setViewName("jsonView");    	  
+    	
+    	String LoginType = FinalValues.LOGIN_TYPE;
+		String LoginMsg = FinalValues.LOGIN_MSG;
     	try {
+    			
+    			
     		    Map<String,Object> resultInfoMap = loginService.getLoginInfo(commandMap.getMap()); 
     		    boolean pass_err = false;
 	    		   /*
@@ -70,15 +76,15 @@ public class LoginController {
 	            	    			sBox.put("USER_NAME", resultInfoMap.get("USER_NAME"));
 	            	    			sBox.put("EMAIL", resultInfoMap.get("EMAIL"));
 	            	    			sBox.put("AUTH", resultInfoMap.get("AUTH"));
-	            	        		mv.addObject(FinalValues.LOGIN_TYPE, 1);            	        		
+	            	        		mv.addObject(LoginType, 1);            	        		
 	            	        		pass_err = true;
 	            	        	}
 	    	    			
 	    	    			
 	    	    		} else {//비밀번호 다름
 	    	    			pass_err = false;
-	    	    			mv.addObject(FinalValues.LOGIN_TYPE, 3);
-	    	    			mv.addObject(FinalValues.LOGIN_MSG, FinalValues.LOGIN_MSG_3);
+	    	    			mv.addObject(LoginType, 3);
+	    	    			mv.addObject(LoginMsg, FinalValues.LOGIN_MSG_3);
 	    	    			
 	    	    		}
 	    	    		
@@ -88,20 +94,20 @@ public class LoginController {
 	    	    		
     	    		}else {//오류 실패횟수 초과
 	    				pass_err = false;
-	    				mv.addObject(FinalValues.LOGIN_TYPE, 4);
-    	    			mv.addObject(FinalValues.LOGIN_MSG, FinalValues.LOGIN_MSG_4);
+	    				mv.addObject(LoginType, 4);
+    	    			mv.addObject(LoginMsg, FinalValues.LOGIN_MSG_4);
 	    			}    	    		    	    
     	    		
     	    	} else {//아이디 다름    	    		
-    	    		mv.addObject(FinalValues.LOGIN_TYPE, 2);
-    	    		mv.addObject(FinalValues.LOGIN_MSG, FinalValues.LOGIN_MSG_2);    	    		
+    	    		mv.addObject(LoginType, 2);
+    	    		mv.addObject(LoginMsg, FinalValues.LOGIN_MSG_2);    	    		
     	    	}
     	    	
     	    	
     		
     	}catch(Exception ex) {//쿼리 에러    		
-    		mv.addObject(FinalValues.LOGIN_TYPE, 5);
-    		mv.addObject(FinalValues.LOGIN_MSG, FinalValues.LOGIN_MSG_5);
+    		mv.addObject(LoginType, 5);
+    		mv.addObject(LoginMsg, FinalValues.LOGIN_MSG_5);
     		ex.printStackTrace();
     	}
     	

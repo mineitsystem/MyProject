@@ -160,12 +160,14 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
             
             List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
         	String[] menu_point =  requestURI.split("/");    
+        	if(mav !=null) {
+        		mav.addObject("LEFT_MENU", service.listLeftMenu(map));
+            	//mav.addObject("LEFT_MENU", MenuUtil.getMenuList(map));
+            	mav.addObject("MENU_POINT", menu_point);
+            	//menu_point[2].toUpperCase().contains("BOARD");
+            	mav.addObject("contextPath",contextPath);
         	
-        	mav.addObject("LEFT_MENU", service.listLeftMenu(map));
-        	//mav.addObject("LEFT_MENU", MenuUtil.getMenuList(map));
-        	mav.addObject("MENU_POINT", menu_point);
-        	//menu_point[2].toUpperCase().contains("BOARD");
-        	mav.addObject("contextPath",contextPath);
+        	}        	
 
         } catch (Exception e) {
             e.printStackTrace();

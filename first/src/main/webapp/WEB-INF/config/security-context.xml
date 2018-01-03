@@ -6,35 +6,34 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config='true' use-expressions="true">
-		<intercept-url pattern="/login/login.do" access="isAnonymous()" />
-		<intercept-url pattern="/login/login.do" access="isAnonymous()" />
-		<intercept-url pattern="/resources/**" access="permitAll" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-		<!-- 
-		role 
-		<intercept-url pattern="..." access="hasRole('ROLE_ANONYMOUS')" />
-        <intercept-url pattern="..." access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="..." access="hasRole('ROLE_ADMIN')" /> 
-        -->
-        <!--
-        	login-page= 사용자 로그인 페이지
-        	default-target-url= 로그인 성공후 이동할 페이지
-        	authentication-failure-url= 로그인 실패후 페이지
-          -->
-		<form-login login-page="/login/login.do" default-target-url="/community/openBoardList.do"
-			username-parameter="id" password-parameter="password"
-			authentication-failure-url="/login/login.do" always-use-default-target='true' />
+	<http auto-config='true' use-expressions="true" access-denied-page="/security/denied">
+		
+		<form-login 
+		login-page="/security/signin" 
+		username-parameter="user_id" 
+		password-parameter="password" 
+		authentication-failure-url="/security/signin?error=true" 
+		default-target-url="/security/mypage" 
+		always-use-default-target="false" /> 
 
-		<logout invalidate-session="true" logout-url="/community/openBoardList.do"
-			logout-success-url="j_spring_security_logout" />
+
+		<logout 
+		invalidate-session="true" 
+		logout-success-url="/security/signin" 
+		logout-url="/security/signout" />
 		<!-- enable csrf protection -->
 		<csrf />
 	</http>
-	<authentication-manager>
-		<authentication-provider user-service-ref="LoginController" />
-	</authentication-manager>
-	<beans:bean id="LoginController" class="first.common.controller.LoginController">
-	</beans:bean>
+	<authentication-manager> 
+		<authentication-provider> 
+			<password-encoder ref="passwordEncoder"/> 
+			<user-service> 
+				<user name="guest" password="35675e68f4b5af7b995d9205ad0fc43842f16450" authorities="ROLE_USER"/> 
+				<user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/> 
+			</user-service> 
+		</authentication-provider> 
+	</authentication-manager> 
+	<beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder" /> 
+
 </beans:beans>
 
