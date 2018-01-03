@@ -6,10 +6,10 @@ import org.junit.Test;
 
 public class CalculatorTest {
 
-	/*@Test
+	@Test
 	public void testSum() {
 		Calculator calculator = new Calculator();
 		assertEquals(30, calculator.sum(10,20));		
-	}*/
+	}
 
 }
