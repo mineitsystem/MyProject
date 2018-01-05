@@ -48,6 +48,22 @@
      
     <%@ include file="/WEB-INF/include/include-body.jspf" %>
     <script type="text/javascript">
+    
+	    validationChk = function(){
+			// 사용자 ID 필수체크
+			if($("input[name='TITLE']").val().isBlank()) {	
+				modalAlert("알림","제목을 입력해주세요");			
+				$("input[name='TITLE']").focus(); 
+	            return false;
+	        }
+			// 사용자 PASSWORD 필수체크
+			if($("textarea[name='CONTENTS']").val().isBlank()) {
+				modalAlert("알림","내용을 입력해주세요");			
+				$("textarea[name='CONTENTS']").focus();
+	            return false;
+	        }
+	        return true;		
+		}
     	var gfv_count = 1;
     	
         $(document).ready(function(){
@@ -79,6 +95,9 @@
         }
         
         function fn_insertBoard(){
+        	
+        	if(!validationChk())return;
+        	
             var comSubmit = new ComSubmit("frm");
             comSubmit.setUrl("<c:url value='/community/insertBoard.do' />");
             comSubmit.submit();
