@@ -12,7 +12,7 @@ import first.common.util.ScreenResolver;
 public class AdminController {
 	
 	
-	@RequestMapping(value= {"/admin","/admin.do"})
+	@RequestMapping(value= "/admin")
     public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv) throws Exception{
 		mv.setViewName("/admin/admin");
 		mv.addObject("setHeader", ScreenResolver.resolve(this));

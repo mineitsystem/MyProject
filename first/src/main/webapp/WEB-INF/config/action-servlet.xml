@@ -5,7 +5,8 @@
     xmlns="http://www.springframework.org/schema/beans"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:aop="http://www.springframework.org/schema/aop"
-     xsi:schemaLocation="
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context 
@@ -13,7 +14,9 @@
        http://www.springframework.org/schema/mvc 
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/aop 
-       http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/security 
+       http://www.springframework.org/schema/security/spring-security.xsd">
 
 	
 	<mvc:resources mapping="/css/**" location="/resources/css/" />
@@ -26,6 +29,8 @@
 	<context:component-scan base-package="first" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+	
+	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 	
 	<mvc:annotation-driven>
         <mvc:argument-resolvers>

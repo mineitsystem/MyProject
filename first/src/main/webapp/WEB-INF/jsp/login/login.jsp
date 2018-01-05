@@ -13,8 +13,8 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" name="frm" id="frm">
-                            <fieldset>
+                        <form role="form" name="frm" id="frm" method="post">
+                            <fieldset id="login_success">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="ID" name="id" type="text" autofocus>
                                 </div>
@@ -31,6 +31,14 @@
                                 <div style="width:100%;text-align:right;">
                                 	<input type="button" class="btn btn-difault btn-xs" value="Sign In" />
                                 </div>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </fieldset>
+                            <fieldset id="login_fail" style="display:none">
+                                <div class="form-group">
+                                    	로그인 실패
+                                </div>                                                             
+                                <input type="button" class="btn btn-lg btn-success btn-block" id="reLogin" value="reLogin"/><br/>    
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </fieldset>
                         </form>
                     </div>
@@ -50,10 +58,14 @@
 				
 		if(!validationChk())return;
 		 
-		var comAjax = new ComAjax("frm");
-        comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
-        comAjax.setCallback("fn_selectLoginCallBack");
-        comAjax.ajax();
+		 
+		//var comAjax = new ComAjax("frm");
+        //comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
+        //comAjax.setCallback("fn_selectLoginCallBack");
+        //comAjax.ajax(); 		             
+        $("#frm").attr("action", "<c:url value='/j_spring_security_check' />");        
+        $("#frm").submit();
+        
 			
 	}
 	
@@ -138,6 +150,11 @@
 	
 	//최종실행
 	$(document).ready(function(){
+		var login_type = "${result}";
+		if(login_type){
+			$("#login_fail").css("display","");
+			$("#login_success").css("display","none");
+		}
 		 // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var userInputId = getCookie("userInputId");
 	    $("input[name='id']").val(userInputId); 
@@ -161,7 +178,12 @@
 	            var userInputId = $("input[name='id']").val();
 	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
 	        }
-	    });	    	  
+	    });	  
+	    
+	    $("#reLogin").click(function(){
+	    	
+	    	location.href="${contextPath}/login/login";
+	    });
 	});
 		
 	</script>

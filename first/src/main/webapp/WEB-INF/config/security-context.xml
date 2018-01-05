@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-           http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+			 xmlns:beans="http://www.springframework.org/schema/beans" 
+			 xmlns:context="http://www.springframework.org/schema/context" 
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			 xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+			 					  http://www.springframework.org/schema/beans/spring-beans.xsd 
+			 					  http://www.springframework.org/schema/context 
+			 					  http://www.springframework.org/schema/context/spring-context.xsd 
+			 					  http://www.springframework.org/schema/security 
+			 					  http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http auto-config='true' use-expressions="true" access-denied-page="/security/denied">
+ 
+<http pattern="/css/**" security="none" />
+<http pattern="/js/**" security="none" />
+<http pattern="/images/**" security="none" />
+<http pattern="/vendor/**" security="none" />
+<http pattern="/resources/**" security="none" />
+
+<http auto-config="true" use-expressions="true">
+	<intercept-url pattern="/main/*" access="permitAll" />
+	<intercept-url pattern="/community/*" access="permitAll" />
+	<intercept-url pattern="/example/*" access="permitAll" />	
+	<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
+	<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />						
+	<form-login login-page="/login/login"		
+	    login-processing-url="/j_spring_security_check"	     	
+		username-parameter="id" 
+		password-parameter="password"		
+		authentication-failure-url="/login/login?result=false"
+		/>				
+	 <access-denied-handler error-page="/login/accessdenied"/>	
+	 <logout logout-success-url="/main/main" /> 
+</http>
+
+<authentication-manager>
+	<authentication-provider>
+		<!-- 
+		<user-service>
+			<user name="guest" authorities="ROLE_USER"  password="guest" />
+			<user name="user"  authorities="ROLE_ADMIN"  password="user" />
+		</user-service> 
+		-->
 		
-		<form-login 
-		login-page="/security/signin" 
-		username-parameter="user_id" 
-		password-parameter="password" 
-		authentication-failure-url="/security/signin?error=true" 
-		default-target-url="/security/mypage" 
-		always-use-default-target="false" /> 
+		<jdbc-user-service data-source-ref="dataSourceSpied"
+				users-by-username-query="SELECT USER_ID AS username, PASS AS password, ENABLED AS enabled
+					FROM TB_USER WHERE USER_ID=?"
+				authorities-by-username-query="SELECT USER_ID AS username, AUTHORITY AS authority
+					FROM TB_USER WHERE USER_ID=?" />
+	</authentication-provider>
+</authentication-manager>
+<!-- 
+<beans:bean id="userLoginSuccessHandler"
+  class="first.common.util.UserLoginSuccessHandler"></beans:bean>
+<beans:bean id="userLoginFailureHandler"
+  class="first.common.util.UserLoginFailureHandler"></beans:bean>  
+-->
 
-
-		<logout 
-		invalidate-session="true" 
-		logout-success-url="/security/signin" 
-		logout-url="/security/signout" />
-		<!-- enable csrf protection -->
-		<csrf />
-	</http>
-	<authentication-manager> 
-		<authentication-provider> 
-			<password-encoder ref="passwordEncoder"/> 
-			<user-service> 
-				<user name="guest" password="35675e68f4b5af7b995d9205ad0fc43842f16450" authorities="ROLE_USER"/> 
-				<user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/> 
-			</user-service> 
-		</authentication-provider> 
-	</authentication-manager> 
-	<beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder" /> 
-
-</beans:beans>
+</beans:beans> 
 

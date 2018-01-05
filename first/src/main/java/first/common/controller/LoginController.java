@@ -17,6 +17,7 @@ import first.common.dto.SessionBox;
 import first.common.dto.CommandMap;
 import first.common.service.LoginService;
 import first.common.util.FinalValues;
+import first.common.util.ScreenResolver;
 
 @Controller
 @RequestMapping(value="/login")
@@ -27,8 +28,9 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value= {"/login","/login.do"})
-    public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv) throws Exception{
+    public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv, String result) throws Exception{
 		mv.setViewName("/login/login");
+		mv.addObject("result", result);
     	return mv;
     }
 	
@@ -57,29 +59,24 @@ public class LoginController {
     	    		Map<String,Object> resultPassMap = loginService.getLoginPass(commandMap.getMap()); 
     	    		if((Integer)resultInfoMap.get("PASS_ERR") < 6) {
     	    			
-	    	    		if("1".equals(resultPassMap.get("PASSCNT").toString())){//비밀번호 일치
+	    	    		if("1".equals(resultPassMap.get("PASSCNT").toString())){//비밀번호 일치	    	    			
 	    	    			
-	    	    			
-	    	    				HttpSession session = request.getSession(true);
-	            	        	if (!session.isNew()) {
-	            	        		        		
-	            	        		session.removeAttribute(FinalValues.COMM_USER_KEY);
-	            	    			session.removeAttribute(FinalValues.COMM_USER_AUTH);
-	            	    			session.invalidate();
-	            	    									
-	            	    			session = request.getSession(true);
-	            	        		
-	            	    			//사용자 정보 세션처리
-	            	    			SessionBox sBox = new SessionBox(session, FinalValues.COMM_USER_KEY);
-	            	    			session.setAttribute(FinalValues.COMM_USER_KEY, new Hashtable<String, String>());				
-	            	    			sBox.put("USER_ID", resultInfoMap.get("USER_ID"));
-	            	    			sBox.put("USER_NAME", resultInfoMap.get("USER_NAME"));
-	            	    			sBox.put("EMAIL", resultInfoMap.get("EMAIL"));
-	            	    			sBox.put("AUTH", resultInfoMap.get("AUTH"));
-	            	        		mv.addObject(LoginType, 1);            	        		
-	            	        		pass_err = true;
-	            	        	}
-	    	    			
+    	    				HttpSession session = request.getSession(true);	            	        	
+        	        		session.removeAttribute(FinalValues.COMM_USER_KEY);
+        	    			session.removeAttribute(FinalValues.COMM_USER_AUTH);
+        	    			session.invalidate();
+            	    									
+        	    			session = request.getSession(true);
+        	        		
+        	    			//사용자 정보 세션처리
+        	    			SessionBox sBox = new SessionBox(session, FinalValues.COMM_USER_KEY);
+        	    			session.setAttribute(FinalValues.COMM_USER_KEY, new Hashtable<String, String>());				
+        	    			sBox.put("USER_ID", resultInfoMap.get("USER_ID"));
+        	    			sBox.put("USER_NAME", resultInfoMap.get("USER_NAME"));
+        	    			sBox.put("EMAIL", resultInfoMap.get("EMAIL"));
+        	    			sBox.put("AUTH", resultInfoMap.get("AUTH"));
+        	        		mv.addObject(LoginType, 1);            	        		
+        	        		pass_err = true;	            	        
 	    	    			
 	    	    		} else {//비밀번호 다름
 	    	    			pass_err = false;
@@ -112,6 +109,14 @@ public class LoginController {
     	}
     	
     	    
+    	return mv;
+    }
+	
+	
+	@RequestMapping(value= "/accessdenied")
+    public ModelAndView accessDenied(CommandMap commandMap, ModelAndView mv) throws Exception{
+		mv.setViewName("/error/accessdenied");
+		mv.addObject("setHeader", ScreenResolver.resolve(this));
     	return mv;
     }
 }

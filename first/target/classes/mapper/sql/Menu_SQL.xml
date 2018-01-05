@@ -14,8 +14,7 @@
 	           A.CREA_DTM, 
 	           A.CREA_ID, 
 	           A.LINK, 
-	           A.USE_YN, 
-	           A.AUTH,
+	           A.USE_YN, 	           
                (SELECT COUNT(*) FROM TB_MENU B WHERE A.PARENT_IDX = B.PARENT_IDX AND A.MENU_IDX < B.MENU_IDX) AS SUBMENU_CNT
 	        FROM
 	            TB_MENU A
