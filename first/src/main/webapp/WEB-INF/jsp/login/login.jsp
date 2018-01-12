@@ -27,9 +27,9 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="button" class="btn btn-lg btn-success btn-block" onclick="goLogin()" value="Login"/><br/>
+                                <input type="button" class="btn btn-lg btn-success btn-block" id="log_in" value="Login"/><br/>
                                 <div style="width:100%;text-align:right;">
-                                	<input type="button" class="btn btn-difault btn-xs" value="Sign In" />
+                                	<input type="button" class="btn btn-difault btn-xs" id="sign_in" value="Sign In" />
                                 </div>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </fieldset>
@@ -46,30 +46,105 @@
             </div>
         </div>        
     </div>
+    
+    <div class="modal fade" id="modal_signin_content" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header" id="modal_header">
+                     <button type="button" class="close" name="modal_close" aria-hidden="true">×</button>
+                     <h4 class="modal-title" id="modal_signin_title">Sign In</h4>
+                 </div>
+                 <div class="modal-body" id="modal_signin_body">
+                       <div class="row">
+						    <div>
+						      <form class="form-horizontal" role="form" id="signin_form">
+						        									
+						          <!-- Text input-->
+						          <div class="form-group">
+						            <label class="col-sm-2 control-label" for="textinput" >ID</label>
+						            <div class="col-sm-10">
+						              <input type="text" placeholder="ID" class="form-control" name="USER_ID" id="USER_ID">
+						              <label class="col-sm-10" name="input_state"></label>
+						            </div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <label class="col-sm-2 control-label" for="textinput" >Name</label>
+						            <div class="col-sm-10">
+						              <input type="text" placeholder="Name" class="form-control" name="USER_NAME" id="USER_NAME">
+						              <label class="col-sm-10" name="input_state"></label>
+						            </div>
+						          </div>
+						
+						          <!-- Text input-->
+						          <div class="form-group" >
+						            <label class="col-sm-2 control-label" for="textinput" >Password</label>
+						            <div class="col-sm-10">
+						              <input type="password" placeholder="Password" class="form-control" name="PASS" id="PASS" >
+						              <label class="col-sm-10" name="input_state"></label>
+						            </div>
+						          </div>
+						          
+						          <div class="form-group" >
+						            <label class="col-sm-2 control-label" for="textinput" >PW Check</label>
+						            <div class="col-sm-10">
+						              <input type="password" placeholder="Password Check" class="form-control" name="PASS2" id="PASS2" >
+						              <label class="col-sm-10" name="input_state"></label>
+						            </div>
+						          </div>
+						
+						          <!-- Text input-->
+						          <div class="form-group" >
+						            <label class="col-sm-2 control-label" for="textinput" >E-Mail</label>
+						            <div class="col-sm-10">
+						              <input type="text" placeholder="E-Mail" class="form-control" name="EMAIL" id="EMAIL" >
+						              <label class="col-sm-10" name="input_state"></label>
+						            </div>
+						          </div>
+						
+						          <!-- Text input-->
+						          <!-- <div class="form-group" >
+						            <label class="col-sm-2 control-label" for="textinput" name="signin_from_size">Authority</label>
+						            <div class="col-sm-4">
+						              <input type="text" placeholder="Authority" class="form-control" value="ROLE_USER">
+						            </div>
+						
+						            <label class="col-sm-2 control-label" for="textinput" name="signin_from_size">Postcode</label>
+						            <div class="col-sm-4">
+						              <input type="text" placeholder="Post Code" class="form-control">
+						            </div>
+						          </div> -->						          								
+						          <!-- Text input-->
+						          <div class="form-group">
+						            <label class="col-sm-2 control-label" for="textinput">Authority</label>
+						            <div class="col-sm-10">
+						              <select class="form-control" id="AUTHORITY" name="AUTHORITY" style="background-color: #eee;" onFocus='this.initialSelect = this.selectedIndex;' onChange='this.selectedIndex = this.initialSelect;'>
+						              		<option value="ROLE_USER">ROLE_USER</option>
+						              		<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+						              </select>
+						            </div>
+						          </div>
+												       
+						      </form>
+						    </div><!-- /.col-lg-12 -->
+						</div><!-- /.row -->
+                 </div>
+                 <div class="modal-footer">
+                 	 <button type="button" class="btn btn-primary" id="modal_signin_confirm">Save</button>
+                     <button type="button" class="btn btn-default" name="modal_close">Cancel</button>                     
+                 </div>
+             </div>
+             <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+     </div>
+   
+    
+    
 	<script type="text/javascript">
 	//함수 선언부
 	
-	var goLogin = function(e){
-		if(e){
-			if (e.keyCode != 13) {		
-		        return false;
-			}
-		}
-				
-		if(!validationChk())return;
-		 
-		 
-		//var comAjax = new ComAjax("frm");
-        //comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
-        //comAjax.setCallback("fn_selectLoginCallBack");
-        //comAjax.ajax(); 		             
-        $("#frm").attr("action", "<c:url value='/j_spring_security_check' />");        
-        $("#frm").submit();
-        
-			
-	}
-	
-	function fn_selectLoginCallBack(data){
+	var fn_selectLoginCallBack = function (data){
         var type = data.L_TYPE;
         var msg = data.L_MSG;
         var f_id = $("input[name='id']");
@@ -104,7 +179,42 @@
        
     }
 	
-	validationChk = function(){
+	var goLogin = function(e){
+		if(e){
+			if (e.keyCode != 13) {		
+		        return false;
+			}
+		}
+				
+		if(!validationChk())return;
+		 
+		 
+		//var comAjax = new ComAjax("frm");
+        //comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
+        //comAjax.setCallback("fn_selectLoginCallBack");
+        //comAjax.ajax(); 	
+        //var pass = $("input[name='password']").val();
+        //$.when(SHA256($("input[name='password']").val())).done(function(result) {      			
+        //	$("input[name='password']").val(result);
+        //});        
+        $("#frm").attr("action", "<c:url value='/j_spring_security_check' />");        
+        $("#frm").submit();
+        
+			
+	}	
+	
+	var goSignin = function(){
+		
+		if(!validationChk_SignIn())return;		
+		
+		var comSubmit = new ComSubmit("signin_form");
+        comSubmit.setUrl("<c:url value='/login/insertUser.do' />");
+        comSubmit.submit();
+		
+	}
+
+	
+	var validationChk = function(){
 		// 사용자 ID 필수체크
 		if($("input[name='id']").val().isBlank()) {	
 			modalAlert("알림","아이디를 입력해주세요");			
@@ -118,6 +228,59 @@
             return false;
         }
         return true;		
+	}
+	
+	var validationChk_SignIn = function(){
+		
+		var passRule = /^[A-Za-z0-9]{6,12}$/;//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+		
+		var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+		
+		$("label[name='input_state']").html("");
+				
+		if($("input[id='USER_ID']").val().isBlank()) {			
+            return validationChk_SignIn_Set("USER_ID","아이디를");
+        }
+		
+		if($("input[id='USER_NAME']").val().isBlank()) {
+			return validationChk_SignIn_Set("USER_NAME","이름을");
+        }
+		
+		if($("input[id='PASS']").val().isBlank()) {
+			return validationChk_SignIn_Set("PASS","비밀번호를");
+        }
+		
+		if($("input[id='PASS2']").val().isBlank()) {
+			return validationChk_SignIn_Set("PASS2","비밀번호 확인을");
+        }
+		
+		if($("input[id='PASS2']").val() != $("input[id='PASS']").val()) {
+			return validationChk_SignIn_Set("PASS2","비밀번호를 동일하게");
+        }
+		
+		if($("input[id='EMAIL']").val().isBlank()) {
+			return validationChk_SignIn_Set("EMAIL","이메일을");
+        }
+		
+		if(!passRule.test($("input[id='PASS']").val())) {
+			$("input[id='PASS']").val("");
+			$("input[id='PASS2']").val("");
+			return validationChk_SignIn_Set("PASS","숫자와 문자 포함 형태의 6~12자리 암호를");
+        }
+		
+		if(!emailRule.test($("input[id='EMAIL']").val())) {			
+			$("input[id='EMAIL']").val("");
+			return validationChk_SignIn_Set("EMAIL","이메일 형식을 정확히");
+        }
+		
+		return true;
+	}
+	
+	var validationChk_SignIn_Set = function(id,msg){		
+		$("input[id='"+id+"']+label").html(msg+" 입력해주세요.");		
+		$("input[id='"+id+"']+label").css("color","red");		
+		$("input[id='"+id+"']").focus(); 
+        return false;
 	}
 	
 	setCookie = function(cookieName, value, exdays){
@@ -180,12 +343,39 @@
 	        }
 	    });	  
 	    
-	    $("#reLogin").click(function(){
-	    	
-	    	location.href="${contextPath}/login/login";
+	    $("#log_in").click(function(){	    
+	    	goLogin();
 	    });
+	    
+	    $("#sign_in").click(function(){	  
+	    	$("label[name='input_state']").css("margin-top","5px");
+	    	$("#signin_form label").css("margin-left","-5px");
+	    	$("#signin_form label").css("font-size","12px");
+	    	$("#signin_form input").css("margin-left","-12px");
+	    	$("#signin_form select").css("margin-left","-12px");
+	    		    	
+	    	$("#modal_signin_content").modal("show");
+	    });
+	    
+	    $("#modal_signin_confirm").click(function(e){	  
+	    	e.preventDefault();
+	    	goSignin();
+	    });
+	    
+	    $("button[name='modal_close']").click(function(e){
+	    	$("#signin_form")[0].reset();
+	    	$("#modal_signin_content").modal("toggle");
+	    });
+	    
+	    $('#modal_signin_content').on('hidden.bs.modal', function () {
+	    	$("#signin_form")[0].reset();
+	    });
+	    
+	    $("#reLogin").click(function(){	    	
+	    	location.href="${contextPath}/login/login";
+	    });	    	    	  
+	    
 	});
 		
-	</script>
-	
+	</script>	
 </body>

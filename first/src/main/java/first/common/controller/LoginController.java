@@ -1,5 +1,7 @@
 package first.common.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -9,13 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import first.common.dto.SessionBox;
+import first.common.dto.UserDetailsVO;
 import first.common.dto.CommandMap;
 import first.common.service.LoginService;
+import first.common.service.ShaEncoder;
+import first.common.service.UserService;
 import first.common.util.FinalValues;
 import first.common.util.ScreenResolver;
 
@@ -26,6 +36,12 @@ public class LoginController {
 	
 	@Resource(name="LoginService")
 	private LoginService loginService;
+	
+	@Resource(name="UserService")
+	private UserService userService;
+	
+	@Resource(name="shaEncoder")
+	private ShaEncoder encoder;
 	
 	@RequestMapping(value= {"/login","/login.do"})
     public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv, String result) throws Exception{
@@ -111,6 +127,16 @@ public class LoginController {
     	    
     	return mv;
     }
+    
+	
+	@RequestMapping(value="/insertUser.do")
+	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request) throws Exception{
+	    ModelAndView mv = new ModelAndView("redirect:/login/login");
+	    commandMap.getMap().put("PASS", encoder.saltEncoding(commandMap.getMap().get("PASS").toString(),commandMap.getMap().get("EMAIL").toString())); 
+	    userService.insertUser(commandMap.getMap());
+	     
+	    return mv;
+	}
 	
 	
 	@RequestMapping(value= "/accessdenied")
@@ -119,4 +145,5 @@ public class LoginController {
 		mv.addObject("setHeader", ScreenResolver.resolve(this));
     	return mv;
     }
+	
 }

@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `example` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `example`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: example
@@ -35,7 +33,7 @@ CREATE TABLE `tb_file` (
   `DEL_GB` varchar(1) DEFAULT 'N',
   PRIMARY KEY (`IDX`),
   UNIQUE KEY `STORED_FILE_NAME_UNIQUE` (`STORED_FILE_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +42,7 @@ CREATE TABLE `tb_file` (
 
 LOCK TABLES `tb_file` WRITE;
 /*!40000 ALTER TABLE `tb_file` DISABLE KEYS */;
-INSERT INTO `tb_file` VALUES (5,1376228,'메세지 라벨 정리.txt','6b257f2d80fc42e3ac2f6f755906692b.txt',24066,'2017-11-22 10:52:34','admin','N'),(6,1376228,'메세지 라벨 테스트.txt','062da0543fbe4674a3fa9790fa87465a.txt',444,'2017-11-22 10:52:34','admin','Y'),(8,1310693,'개발일정_20171013.xlsx','bc9ea6a3a6a8424fbc6b8350a54582c7.xlsx',41749,'2017-11-22 17:32:33','admin','N'),(9,1376226,'MyRoutingDataSource.java','b965ffeb23a743379ccaf039c55555ed.java',1367,'2017-11-23 14:31:48','admin','N'),(10,1408982,'script_8_28.sql','84d3eea69a0648459274fd79274083de.sql',167994,'2017-11-27 09:30:11','admin','N'),(11,1408982,'제목 없음1.png','1b5234bf2fc64ebd90e1d08212a0e258.png',63031,'2017-11-28 17:34:07','admin','N'),(12,1376229,'제목 없음2.png','14436a9c73bd4184ab3a3688df44e0cf.png',37258,'2017-11-28 17:37:49','admin','N'),(13,1408983,'1-4.png','c53a6765663540bb9302bd13a9acf641.png',40326,'2017-11-28 18:23:59','admin','N'),(14,1408983,'1-2.png','4ad01834e344441ea3f820a0ca0a7113.png',23887,'2017-11-28 18:23:59','admin','N');
+INSERT INTO `tb_file` VALUES (5,1376228,'메세지 라벨 정리.txt','6b257f2d80fc42e3ac2f6f755906692b.txt',24066,'2017-11-22 10:52:34','admin','N'),(6,1376228,'메세지 라벨 테스트.txt','062da0543fbe4674a3fa9790fa87465a.txt',444,'2017-11-22 10:52:34','admin','Y'),(8,1310693,'개발일정_20171013.xlsx','bc9ea6a3a6a8424fbc6b8350a54582c7.xlsx',41749,'2017-11-22 17:32:33','admin','N'),(9,1376226,'MyRoutingDataSource.java','b965ffeb23a743379ccaf039c55555ed.java',1367,'2017-11-23 14:31:48','admin','N'),(10,1408982,'script_8_28.sql','84d3eea69a0648459274fd79274083de.sql',167994,'2017-11-27 09:30:11','admin','N'),(11,1408982,'제목 없음1.png','1b5234bf2fc64ebd90e1d08212a0e258.png',63031,'2017-11-28 17:34:07','admin','N'),(12,1376229,'제목 없음2.png','14436a9c73bd4184ab3a3688df44e0cf.png',37258,'2017-11-28 17:37:49','admin','N'),(13,1408983,'1-4.png','c53a6765663540bb9302bd13a9acf641.png',40326,'2017-11-28 18:23:59','admin','Y'),(14,1408983,'1-2.png','4ad01834e344441ea3f820a0ca0a7113.png',23887,'2017-11-28 18:23:59','admin','Y'),(15,1408983,'1-1.png','f8dc6808295d4b05a3c84b07da4c60f5.png',38949,'2017-12-19 13:50:02','admin','N'),(16,1408983,'1-2.png','2803f03839cf4df6a5a5f868ecff4d85.png',23887,'2017-12-19 13:50:02','admin','N');
 /*!40000 ALTER TABLE `tb_file` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-19 13:35:37
+-- Dump completed on 2018-01-12  9:21:25

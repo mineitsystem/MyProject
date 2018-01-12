@@ -20,17 +20,18 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler{
 	   HttpServletResponse res, AuthenticationException auth)
 	   throws IOException, ServletException {
 	  // TODO Auto-generated method stub
-	  logger.info(auth.getLocalizedMessage());
-	  logger.info(auth.getMessage());
-	  for(StackTraceElement s : auth.getStackTrace()){
-	   logger.info(s.getClassName());
-	   logger.info(s.getFileName());
-	   logger.info(s.getMethodName());
-	   logger.info(s.getLineNumber()+"");
-	   logger.info(s.isNativeMethod()+"");
-	  }
-	  req.setAttribute("errMsg",auth.getMessage());
-	  res.sendRedirect(req.getContextPath()+"/main/main");
+		logger.info(auth.getLocalizedMessage());
+		logger.info(auth.getMessage());
+		logger.info(req.getParameter("password"));		
+		/*for(StackTraceElement s : auth.getStackTrace()){
+			logger.info(s.getClassName());
+			logger.info(s.getFileName());
+			logger.info(s.getMethodName());
+			logger.info(s.getLineNumber()+"");
+			logger.info(s.isNativeMethod()+"");
+		}*/
+		req.setAttribute("errMsg",auth.getMessage());
+		res.sendRedirect(req.getContextPath()+"/login/login");
 	 }
 	  
 	} 

@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `example` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `example`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: example
@@ -35,7 +33,7 @@ CREATE TABLE `tb_menu` (
   `CREA_ID` varchar(45) NOT NULL,
   `LINK` varchar(200) DEFAULT '',
   `USE_YN` char(1) NOT NULL DEFAULT 'Y',
-  `AUTH` char(1) NOT NULL DEFAULT 'U',
+  `AUTHORITY` varchar(15) NOT NULL DEFAULT 'ROLE_USER',
   PRIMARY KEY (`IDX`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -46,7 +44,7 @@ CREATE TABLE `tb_menu` (
 
 LOCK TABLES `tb_menu` WRITE;
 /*!40000 ALTER TABLE `tb_menu` DISABLE KEYS */;
-INSERT INTO `tb_menu` VALUES (1,'메인','Main',0,0,'fa fa-star','2017-11-30 14:24:33','admin','/','Y','U'),(2,'커뮤니티','Cummunity',1,0,'fa fa-comments-o','2017-11-30 14:33:10','admin','/community/openBoardList.do','Y','U'),(3,'관리자 페이지','Management',99,0,'fa fa-gear','2017-11-30 14:39:58','admin','/admin','Y','M'),(4,'예제','Example',2,0,'fa fa-pencil','2017-11-30 14:46:28','admin','/example','Y','M'),(5,'Sub1','Sub1',2,1,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub1','Y','M'),(6,'Sub2','Sub2',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub2','Y','M'),(7,'Sub3','Sub3',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub3','Y','M');
+INSERT INTO `tb_menu` VALUES (1,'메인','Main',0,0,'fa fa-star','2017-11-30 14:24:33','admin','/main/main.do','Y','ROLE_USER'),(2,'커뮤니티','Cummunity',1,0,'fa fa-comments-o','2017-11-30 14:33:10','admin','/community/openBoardList.do','Y','ROLE_USER'),(3,'관리자 페이지','Management',99,0,'fa fa-gear','2017-11-30 14:39:58','admin','/admin/admin','Y','ROLE_ADMIN'),(4,'예제','Example',2,0,'fa fa-pencil','2017-11-30 14:46:28','admin','/example','Y','ROLE_USER'),(5,'Sub1','Sub1',2,1,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub1','Y','ROLE_USER'),(6,'Sub2','Sub2',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub2','Y','ROLE_USER'),(7,'Sub3','Sub3',2,2,'fa fa-pencil','2017-11-30 14:46:28','admin','/example/sub3','Y','ROLE_USER');
 /*!40000 ALTER TABLE `tb_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-27 13:15:29
+-- Dump completed on 2018-01-12  9:21:25

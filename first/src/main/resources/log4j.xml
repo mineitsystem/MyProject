@@ -31,6 +31,11 @@
     	<level value="INFO"/>  
         <appender-ref ref="console"/>  
     </logger>  
+    
+    <logger name="org.springframework.security" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>

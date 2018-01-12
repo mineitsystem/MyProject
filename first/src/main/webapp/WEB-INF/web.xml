@@ -6,6 +6,10 @@
     <welcome-file>index_Main.jsp</welcome-file>
   </welcome-file-list>
    
+  <listener>
+    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+  </listener>  
+   
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>

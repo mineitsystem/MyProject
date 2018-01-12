@@ -13,6 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import first.common.dto.UserDetailsVO;
+
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 	  
 	Logger logger = Logger.getLogger(this.getClass());
@@ -22,22 +24,20 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 	   HttpServletResponse res, Authentication auth) throws IOException,
 	   ServletException {
 	  // TODO Auto-generated method stub
-	  logger.info(auth.getName());
-	  logger.info(auth.getAuthorities().toString());
-	  logger.info(auth.getDetails().toString());
-	  logger.info(auth.getPrincipal().toString());
-	  for(GrantedAuthority a : auth.getAuthorities()){
-	   logger.info(a.getAuthority());
-	  }
+		UserDetailsVO u = (UserDetailsVO) auth.getPrincipal();
+		logger.info(auth.getName());
+		logger.info(auth.getAuthorities().toString());
+		logger.info(auth.getDetails().toString());
+		logger.info(auth.getPrincipal().toString());
+		for(GrantedAuthority a : auth.getAuthorities()){
+			logger.info(a.getAuthority());
+		}
+		logger.info(String.valueOf(u.isAccountNonExpired()));
+		logger.info(String.valueOf(u.isAccountNonLocked()));
+		logger.info(String.valueOf(u.isCredentialsNonExpired()));
+		logger.info(String.valueOf(u.isEnabled()));
 	   
-	  UserDetails u = (UserDetails) auth.getPrincipal();
-	   
-	  logger.info(String.valueOf(u.isAccountNonExpired()));
-	  logger.info(String.valueOf(u.isAccountNonLocked()));
-	  logger.info(String.valueOf(u.isCredentialsNonExpired()));
-	  logger.info(String.valueOf(u.isEnabled()));
-	   
-	  res.sendRedirect(req.getContextPath()+"/login/login.do");
+	    res.sendRedirect(req.getContextPath()+"/");
 	 }
 	  
 	} 

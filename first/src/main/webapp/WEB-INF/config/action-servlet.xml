@@ -84,10 +84,7 @@
      	<bean id="firstInterceptor" class="first.common.interceptor.AuthenticInterceptor" /> 
      	</mvc:interceptor> 
      </mvc:interceptors>
-
-   	
-   	<aop:aspectj-autoproxy/>
-    <bean id="loggerAspect" class="first.common.logger.LoggerAspect" />
+   	   
 </beans>
 
 

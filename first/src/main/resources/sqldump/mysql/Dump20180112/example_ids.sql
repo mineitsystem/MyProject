@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `example` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `example`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: example
@@ -18,36 +16,27 @@ USE `example`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_user_log`
+-- Table structure for table `ids`
 --
 
-DROP TABLE IF EXISTS `tb_user_log`;
+DROP TABLE IF EXISTS `ids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_user_log` (
-  `IDX` int(11) NOT NULL,
-  `USER_ID` varchar(20) NOT NULL,
-  `USER_NAME` varchar(45) NOT NULL,
-  `PASS` varchar(100) NOT NULL,
-  `PASS_CHG` varchar(7) NOT NULL,
-  `EAMIL` varchar(45) NOT NULL,
-  `PASS_ERR` int(11) NOT NULL DEFAULT '0',
-  `CREA_ID` varchar(20) NOT NULL DEFAULT 'admin',
-  `CREA_DTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `AUTH` char(1) NOT NULL DEFAULT 'N',
-  `LOG_IDX` int(11) NOT NULL AUTO_INCREMENT,
-  `INSERT_TIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`LOG_IDX`)
+CREATE TABLE `ids` (
+  `TABLE_NAME` varchar(16) NOT NULL,
+  `NEXT_ID` decimal(30,0) NOT NULL,
+  PRIMARY KEY (`TABLE_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tb_user_log`
+-- Dumping data for table `ids`
 --
 
-LOCK TABLES `tb_user_log` WRITE;
-/*!40000 ALTER TABLE `tb_user_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_user_log` ENABLE KEYS */;
+LOCK TABLES `ids` WRITE;
+/*!40000 ALTER TABLE `ids` DISABLE KEYS */;
+INSERT INTO `ids` VALUES ('SAMPLE',115);
+/*!40000 ALTER TABLE `ids` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-27 13:15:30
+-- Dump completed on 2018-01-12  9:21:25

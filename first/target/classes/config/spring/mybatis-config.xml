@@ -10,7 +10,7 @@
         <!-- <setting name="defaultExecutorType" value="BATCH" /> -->
     </settings>
 	<!-- test  -->
-    <typeAliases>
+    <typeAliases>    	
         <typeAlias type="first.common.dto.BaseMap" alias="bMap" />
         <typeAlias type="first.common.dto.CollectionMap" alias="cMap" />
     </typeAliases>

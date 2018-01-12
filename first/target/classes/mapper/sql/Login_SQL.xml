@@ -22,6 +22,26 @@
 	    
 	</select>	
 	
+	<select id="selectUser" parameterType="hashmap" resultType="hashmap">
+	    <![CDATA[
+	       SELECT 
+	       USER_ID AS username, 
+	       PASS    AS password, 
+	       ENABLED AS enabled,
+	       AUTHORITY AS authority,
+	       EMAIL AS email
+		   FROM TB_USER
+		   WHERE 1=1
+	    ]]>    	   
+       	<if test="!@first.common.util.MyComparator@isEmpty(username)">
+			<![CDATA[
+				AND USER_ID = #{username}
+			]]>
+		</if>	    
+  
+	    
+	</select>
+	
 	<select id="selectLoginPass" parameterType="hashmap" resultType="hashmap">
 	    <![CDATA[
 	        SELECT COUNT(*) AS PASSCNT FROM 
@@ -59,7 +79,32 @@
 				AND USER_ID = #{id}
 			]]>
 		</if>	    
-  
-	    
+  	    
 	</update>
+	
+	<insert id="insertUser">
+		 <![CDATA[
+			 INSERT INTO TB_USER(
+				USER_ID,
+		        USER_NAME,
+		        PASS,
+		        EMAIL,
+		        CREA_ID,
+		        CREA_DTM,
+		        AUTHORITY,
+		        ENABLED,
+		        PASS_CHG_DT) 
+		     VALUES(
+		        #{USER_ID},
+		        #{USER_NAME},
+		        #{PASS},
+		        #{EMAIL},
+		        #{USER_ID},
+		        NOW(),
+		        #{AUTHORITY},
+		        1,
+		        NOW() + INTERVAL 6 MONTH
+			 );
+		 ]]>
+	</insert> 
 </mapper>
