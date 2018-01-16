@@ -44,8 +44,6 @@ authorities-by-username-query="SELECT USER_ID AS username, AUTHORITY AS authorit
 	FROM TB_USER WHERE USER_ID=?" /> 
 -->
 
-
-
 <authentication-manager>
 	<authentication-provider user-service-ref="userService">
 			<password-encoder ref="passwordEncoder">
@@ -66,9 +64,7 @@ authorities-by-username-query="SELECT USER_ID AS username, AUTHORITY AS authorit
   <beans:constructor-arg name="strength" value="256"></beans:constructor-arg>
 </beans:bean> 
 
-
-<beans:bean id="userService" class="first.common.service.UserAuthenticationService">		
-</beans:bean>		
+<beans:bean id="userService" class="first.common.service.UserAuthenticationService"/>		
 
 </beans:beans> 
 
