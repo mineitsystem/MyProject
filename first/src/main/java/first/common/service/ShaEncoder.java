@@ -2,6 +2,7 @@ package first.common.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
   

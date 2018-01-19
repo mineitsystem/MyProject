@@ -31,7 +31,7 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler{
 			logger.info(s.isNativeMethod()+"");
 		}*/
 		req.setAttribute("errMsg",auth.getMessage());
-		res.sendRedirect(req.getContextPath()+"/login/login");
+		res.sendRedirect(req.getContextPath()+"/login/login?result=false");
 	 }
 	  
 	} 

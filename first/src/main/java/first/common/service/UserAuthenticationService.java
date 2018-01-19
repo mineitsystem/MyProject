@@ -51,7 +51,7 @@ public class UserAuthenticationService implements UserDetailsService {
 			e.printStackTrace();
 		}
 		
-		return new UserDetailsVO(user.get("username").toString().trim(), user.get("password").toString().trim(), (Integer)user.get("enabled") == 1, true, true, true, gas,user.get("email").toString());
+		return new UserDetailsVO(user.get("username").toString().trim(), user.get("password").toString().trim(), (Integer)user.get("enabled") == 1, true, true, true, gas,user.get("email").toString().trim(),user.get("nickname").toString().trim());
 	}
 
 }

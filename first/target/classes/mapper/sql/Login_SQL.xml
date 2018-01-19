@@ -29,7 +29,8 @@
 	       PASS    AS password, 
 	       ENABLED AS enabled,
 	       AUTHORITY AS authority,
-	       EMAIL AS email
+	       EMAIL AS email,
+	       USER_NAME AS nickname
 		   FROM TB_USER
 		   WHERE 1=1
 	    ]]>    	   

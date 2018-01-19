@@ -3,7 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
- 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+
 <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -12,6 +13,24 @@
         <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="<c:url value='/'/>"><p class="fa fa-globe"> Example Explosion</p></a>
+      <!-- 회원 권한이 없을 때 -->
+    <sec:authorize ifNotGranted="ROLE_USER, ROLE_ADMIN">
+        로그인 x
+    </sec:authorize>
+	
+    <!-- 회원 권한이 있을 때 -->
+    <sec:authorize ifAnyGranted="ROLE_USER">
+       일반 로그인 O <sec:authentication property="principal.nickname"/>/<sec:authentication property="principal.email"/>/<sec:authentication property="principal.authorities"/>
+    </sec:authorize>
+
+	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+        관리자
+    </sec:authorize>
+
+    <!-- 여러 권한 체크 -->
+    <%-- <sec:authorize ifAnyGranted="ROLE_USER, ROLE_ADMIN">
+        일반,관리자 모두
+    </sec:authorize> --%>
 </div>
 <!-- /.navbar-header -->
 

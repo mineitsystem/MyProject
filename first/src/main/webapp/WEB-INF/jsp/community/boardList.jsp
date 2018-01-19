@@ -6,10 +6,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
  
 </head>
-<body>
-	
+<body>		
     <div class="col-lg-12">	 	
 	    <div class="panel-body">
 		    <div class="row">
@@ -68,8 +68,10 @@
 					    </div>
 						<div class="col-sm-6">
 							<div>
+								<sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
 								<a href="#this" class="btn btn-outline btn-default" id="write">글쓰기</a>
-								<input type="hidden" id="currentPageNo" name="currentPageNo"/>    		
+								<input type="hidden" id="currentPageNo" name="currentPageNo"/> 
+								</sec:authorize>   		
 							</div>
 						</div>
 					

@@ -30,6 +30,7 @@ public class FileUtils {
         Map<String, Object> listMap = null;
          
         String boardIdx = (String)map.get("IDX");
+        String userID = (String)map.get("USER_ID");
          
         File file = new File(filePath);
         if(file.exists() == false){
@@ -51,6 +52,7 @@ public class FileUtils {
                 listMap.put("ORIGINAL_FILE_NAME", originalFileName);
                 listMap.put("STORED_FILE_NAME", storedFileName);
                 listMap.put("FILE_SIZE", multipartFile.getSize());
+                listMap.put("USER_ID", userID);
                 list.add(listMap);
             }
         }

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
  
 <html lang="ko">
 <head>
@@ -42,7 +43,13 @@
                         </div>
                         <div class="form-group">   
                         	  <button class="btn btn-default" class="btn" id="list">목록으로</button>
-			    			  <button class="btn btn-default" class="btn" id="update">수정하기</button>
+                        	    <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+                        	    	<sec:authentication var="user" property="principal" />
+                        	    	<c:set var="authID" value="${user.username}"/>
+	                        	    	<c:if test="${authID eq map.CREA_ID}">
+	                        	    		<button class="btn btn-default" class="btn" id="update">수정하기</button>										    
+										</c:if>							       							       
+							    </sec:authorize>			    			  
                         </div>
                     </div>
                 </div>

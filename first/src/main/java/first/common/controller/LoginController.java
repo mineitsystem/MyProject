@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -130,8 +132,8 @@ public class LoginController {
     
 	
 	@RequestMapping(value="/insertUser.do")
-	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request) throws Exception{
-	    ModelAndView mv = new ModelAndView("redirect:/login/login");
+	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request,  ModelAndView mv) throws Exception{
+		mv.setViewName("redirect:/login/login");
 	    commandMap.getMap().put("PASS", encoder.saltEncoding(commandMap.getMap().get("PASS").toString(),commandMap.getMap().get("EMAIL").toString())); 
 	    userService.insertUser(commandMap.getMap());
 	     
@@ -143,6 +145,19 @@ public class LoginController {
     public ModelAndView accessDenied(CommandMap commandMap, ModelAndView mv) throws Exception{
 		mv.setViewName("/error/accessdenied");
 		mv.addObject("setHeader", ScreenResolver.resolve(this));
+    	return mv;
+    }
+	
+	@RequestMapping(value= "/checkAuth")
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+    public ModelAndView checkAuth(CommandMap commandMap, ModelAndView mv, Authentication auth) throws Exception{
+		mv.setViewName("checkAuth");
+		mv.addObject("setHeader", ScreenResolver.resolve(this));
+		UserDetailsVO vo = (UserDetailsVO) auth.getPrincipal();
+		log.info("Welcome checkAuth! Authentication is .=========="+ auth);
+		log.info("UserDetailsVO ========="+ vo);
+		mv.addObject("auth", auth );
+		mv.addObject("vo", vo );
     	return mv;
     }
 	

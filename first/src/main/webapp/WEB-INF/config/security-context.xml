@@ -29,11 +29,11 @@
 		authentication-success-handler-ref="userLoginSuccessHandler"
 		authentication-failure-handler-ref="userLoginFailureHandler"/>				
 	 <access-denied-handler ref="userLoginDiniedHandler"/>	
-	 <logout delete-cookies="true" logout-success-url="/main/main" logout-url="/login/logout" invalidate-session="true" /> 
+	 <logout delete-cookies="true" success-handler-ref="userLogoutSuccessHandler" invalidate-session="true" /> 
 	 
-	 <session-management invalid-session-url="/login/login">
+	 <!-- <session-management invalid-session-url="/login/login">
 	  <concurrency-control max-sessions="1" expired-url="/login/login"/>
-	 </session-management> 
+	 </session-management>  -->
 </http>
 
 <!-- 
@@ -58,6 +58,8 @@ authorities-by-username-query="SELECT USER_ID AS username, AUTHORITY AS authorit
   class="first.common.util.UserLoginFailureHandler"></beans:bean>  
 <beans:bean id="userLoginDiniedHandler"
   class="first.common.util.UserDeniedHandler"></beans:bean>  
+<beans:bean id="userLogoutSuccessHandler"
+  class="first.common.util.UserLogoutSuccessHandler"></beans:bean>
 
 
 <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">

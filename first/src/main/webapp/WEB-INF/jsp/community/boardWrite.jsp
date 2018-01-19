@@ -5,11 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
- 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <head>
 </head>
 <body >
     <form id="frm" enctype="multipart/form-data">
+    	<input type="hidden" id="USER_ID" name="USER_ID" value="<sec:authentication property="principal.username" />"/>
     	<div class="col-lg-12">	 	
 			    <div class="panel-body">
 			    	<div class="col-lg-12" >
@@ -22,7 +23,7 @@
 				                    <input class="form-control" id="TITLE" name="TITLE" type="text" value="">                                                      
 				                </div>
 				                <div class="form-group">                    
-				                 	<p class="fa fa-user"> Self</p> | <p class="fa fa-eye"> 0</p> | <p class="fa fa-clock-o"> Now</p>
+				                 	<p class="fa fa-user">&nbsp;<sec:authentication property="principal.username" /></p>				                 	
 				                </div>                     
 		                    </div>
 		                    <div class="panel-body">
