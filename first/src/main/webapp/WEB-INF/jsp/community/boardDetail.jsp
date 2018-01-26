@@ -46,7 +46,7 @@
                         	    <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
                         	    	<sec:authentication var="user" property="principal" />
                         	    	<c:set var="authID" value="${user.username}"/>
-	                        	    	<c:if test="${authID eq map.CREA_ID}">
+	                        	    	<c:if test="${authID eq map.CREA_ID || authID eq 'admin' }">
 	                        	    		<button class="btn btn-default" class="btn" id="update">수정하기</button>										    
 										</c:if>							       							       
 							    </sec:authorize>			    			  

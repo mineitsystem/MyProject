@@ -101,19 +101,7 @@
 						              <label class="col-sm-10" name="input_state"></label>
 						            </div>
 						          </div>
-						
-						          <!-- Text input-->
-						          <!-- <div class="form-group" >
-						            <label class="col-sm-2 control-label" for="textinput" name="signin_from_size">Authority</label>
-						            <div class="col-sm-4">
-						              <input type="text" placeholder="Authority" class="form-control" value="ROLE_USER">
-						            </div>
-						
-						            <label class="col-sm-2 control-label" for="textinput" name="signin_from_size">Postcode</label>
-						            <div class="col-sm-4">
-						              <input type="text" placeholder="Post Code" class="form-control">
-						            </div>
-						          </div> -->						          								
+					          								
 						          <!-- Text input-->
 						          <div class="form-group">
 						            <label class="col-sm-2 control-label" for="textinput">Authority</label>
@@ -188,7 +176,7 @@
 				
 		if(!validationChk())return;
 		 
-		 
+		//일반 로그인 처리 
 		//var comAjax = new ComAjax("frm");
         //comAjax.setUrl("<c:url value='/login/goLoginCheck.do' />");
         //comAjax.setCallback("fn_selectLoginCallBack");
@@ -196,7 +184,9 @@
         //var pass = $("input[name='password']").val();
         //$.when(SHA256($("input[name='password']").val())).done(function(result) {      			
         //	$("input[name='password']").val(result);
-        //});        
+        //});
+        
+        //security 로그인 처리
         $("#frm").attr("action", "<c:url value='/j_spring_security_check' />");        
         $("#frm").submit();
         

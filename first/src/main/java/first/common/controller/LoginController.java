@@ -133,7 +133,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/insertUser.do")
 	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request,  ModelAndView mv) throws Exception{
-		mv.setViewName("redirect:/login/login");
+		mv.setViewName("forward:/login/login");
 	    commandMap.getMap().put("PASS", encoder.saltEncoding(commandMap.getMap().get("PASS").toString(),commandMap.getMap().get("EMAIL").toString())); 
 	    userService.insertUser(commandMap.getMap());
 	     

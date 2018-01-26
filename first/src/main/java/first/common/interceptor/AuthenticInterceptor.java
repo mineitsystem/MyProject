@@ -146,11 +146,9 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
         if (requestURI.startsWith("/zipfdown/"))		    return;
         if (requestURI.startsWith("/exception"))	        return;
         if (requestURI.startsWith("/common/downloadFile"))	return;
-        
-        
-        
+                       
         try {
-        	HttpSession session  = request.getSession(false);
+        	HttpSession session  = request.getSession(true);
         	
         	String contentType = request.getContentType();
             if (contentType == null) 
@@ -161,11 +159,16 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
             List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
         	String[] menu_point =  requestURI.split("/");    
         	if(mav !=null) {
-        		mav.addObject("LEFT_MENU", service.listLeftMenu(map));
-            	//mav.addObject("LEFT_MENU", MenuUtil.getMenuList(map));
+        		if(session.getAttribute("LEFT_MENU") == null) {
+        			session.setAttribute("LEFT_MENU", service.listLeftMenu(map));
+        		}else {
+        			mav.addObject("LEFT_MENU", session.getAttribute("LEFT_MENU"));
+        		}
+        		        		        		           
             	mav.addObject("MENU_POINT", menu_point);
             	//menu_point[2].toUpperCase().contains("BOARD");
             	mav.addObject("contextPath",contextPath);
+            	mav.addObject("requestURI",requestURI);
         	
         	}        	
 

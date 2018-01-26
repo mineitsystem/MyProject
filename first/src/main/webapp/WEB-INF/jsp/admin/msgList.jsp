@@ -15,17 +15,19 @@
 		    <div class="row">
 		    	<div class="col-lg-12">	
 					<table class="table table-bordered table-hover table-striped">
-						<colgroup>
-							<col width="10%"/>
+						<colgroup>							
 							<col width="*"/>
+							<col width="30%"/>
+							<col width="30%"/>
 							<col width="15%"/>
 							<col width="20%"/>
 						</colgroup>
 						<thead>
 							<tr>
-								<th>글번호</th>
-								<th>제목</th>
-								<th>조회수</th>
+								<th>메세지명</th>
+								<th>한국어</th>
+								<th>영어</th>
+								<th>작성자</th>
 								<th>작성일</th>
 							</tr>
 						</thead>
@@ -33,13 +35,14 @@
 							<c:choose>
 								<c:when test="${fn:length(list) > 0}">
 									<c:forEach items="${list }" var="row">
-										<tr class="title" onclick="window.location='#this';">
-											<td>${row.IDX }</td>
+										<tr class="title" onclick="window.location='#this';">											
 											<td class='title'>
-													${row.TITLE }
-					                                <input type="hidden" id="IDX" value="${row.IDX }">
+													${row.MSG_ID }
+					                                <input type="hidden" id="IDX" value="${row.MSG_ID }">
 											</td>
-											<td>${row.HIT_CNT }</td>
+											<td>${row.KO_MSG }</td>
+											<td>${row.EN_MSG }</td>
+											<td>${row.CREA_ID }</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${row.CREA_DTM }"/></td>
 										</tr>
 									</c:forEach>
@@ -68,7 +71,7 @@
 					    </div>
 						<div class="col-sm-6">
 							<div>
-								<sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+								<sec:authorize ifAnyGranted="ROLE_ADMIN">
 								<a href="#this" class="btn btn-outline btn-default" id="write">등록</a>
 								<input type="hidden" id="currentPageNo" name="currentPageNo"/> 
 								</sec:authorize>   		
@@ -87,32 +90,21 @@
         	
             $("#write").on("click", function(e){ //글쓰기 버튼
                 e.preventDefault();
-                fn_openBoardWrite();
+                fn_openMsgWrite();
             });
-             
-            $("tr .title").on("click", function(e){ //제목
-                e.preventDefault();
-                fn_openBoardDetail($(this));
-            });
+                     
         });
          
          
-        function fn_openBoardWrite(){
+        function fn_openMsgWrite(){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/community/openBoardWrite.do' />");
+            comSubmit.setUrl("<c:url value='/admin/messageWrite.do' />");
             comSubmit.submit();
         }
-         
-        function fn_openBoardDetail(obj){
-            var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/community/openBoardDetail.do' />");
-            comSubmit.addParam("IDX", obj.parent().find("#IDX").val());
-            comSubmit.submit();
-        }
-        
+      
         function fn_search(pageNo){
             var comSubmit = new ComSubmit();
-            comSubmit.setUrl("<c:url value='/community/openBoardList.do' />");
+            comSubmit.setUrl("<c:url value='/admin/message.do' />");
             comSubmit.addParam("currentPageNo", pageNo);
             comSubmit.submit();
         }

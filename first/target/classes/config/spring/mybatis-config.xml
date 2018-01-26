@@ -17,6 +17,7 @@
 
     <!-- 개발용. -->
     <mappers>
+    	<mapper resource="mapper/sql/Admin_SQL.xml" />
         <mapper resource="mapper/sql/Common_SQL.xml" />
         <mapper resource="mapper/sql/Menu_SQL.xml" />
         <mapper resource="mapper/sql/Community_SQL.xml" />

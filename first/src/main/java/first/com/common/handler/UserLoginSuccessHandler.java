@@ -1,4 +1,4 @@
-package first.common.util;
+package first.com.common.handler;
 
 import java.io.IOException;
 
@@ -12,10 +12,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import first.common.dto.UserDetailsVO;
 
-public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
+public class UserLoginSuccessHandler 
+extends SavedRequestAwareAuthenticationSuccessHandler 
+implements AuthenticationSuccessHandler{
 	  
 	Logger logger = Logger.getLogger(this.getClass());
 	  
@@ -29,6 +32,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 		logger.info(auth.getAuthorities().toString());
 		logger.info(auth.getDetails().toString());
 		logger.info(auth.getPrincipal().toString());
+		logger.info(u.getEmail().toString());
 		for(GrantedAuthority a : auth.getAuthorities()){
 			logger.info(a.getAuthority());
 		}
@@ -36,8 +40,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 		logger.info(String.valueOf(u.isAccountNonLocked()));
 		logger.info(String.valueOf(u.isCredentialsNonExpired()));
 		logger.info(String.valueOf(u.isEnabled()));
-	   
-	    res.sendRedirect(req.getContextPath()+"/");
+		super.onAuthenticationSuccess(req, res, auth);
 	 }
 	  
 	} 
