@@ -7,12 +7,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  
 </head>
 <body>		
     <div class="col-lg-12">	 	
 	    <div class="panel-body">
-		    <div class="row">
+		    <div class="row">		    	
+					<div class="col-lg-12">											   
+				       <strong>Reload State</strong>
+                       <span class="pull-right text-muted" id="reloadMessageState"><!-- 40% Complete --></span>                            
+                       <div class="progress progress-striped active">
+                           <div class="progress-bar progress-bar-success" id="reloadMessage" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                               <span class="sr-only" id="reloadMessageStateBar"></span>
+                           </div>
+                       </div>                        
+				   </div>		       
 		    	<div class="col-lg-12">	
 					<table class="table table-bordered table-hover table-striped">
 						<colgroup>							
@@ -70,32 +80,56 @@
 						    </div>
 					    </div>
 						<div class="col-sm-6">
-							<div>
-								<sec:authorize ifAnyGranted="ROLE_ADMIN">
-								<a href="#this" class="btn btn-outline btn-default" id="write">등록</a>
-								<input type="hidden" id="currentPageNo" name="currentPageNo"/> 
-								</sec:authorize>   		
-							</div>
-						</div>
-					
+							<sec:authorize ifAnyGranted="ROLE_ADMIN">
+							<a href="#this" class="btn btn-outline btn-default" id="write">등록</a>							
+							<a href="#this" class="btn btn-outline btn-default" id="reloadMsg">Reload Message</a>						    					    							
+							<input type="hidden" id="currentPageNo" name="currentPageNo"/>																						 
+							</sec:authorize>   														
+						</div>																	
 					</div>
 			    </div>      			
 			</div>
 		</div>
 	</div>
-
+	<%-- 
+	<spring:message code='MSG.input'/>
+	<spring:message code='MSG.test'/>
+	<spring:message code='UI.signin'/> 
+	--%>
 	<%@ include file="/WEB-INF/include/include-body.jspf" %>
     <script type="text/javascript">
+    	var doubleSubmitFlag = false;
         $(document).ready(function(){
-        	
+        	$(".progress-bar").animate({
+        	    width: "0%"
+        	}, 100 );   
             $("#write").on("click", function(e){ //글쓰기 버튼
                 e.preventDefault();
                 fn_openMsgWrite();
             });
+            
+            $("#reloadMsg").on("click", function() {              	
+            	if(doubleSubmitCheck()) return;          
+            	fn_reloadMessage();
+            });
                      
         });
          
-         
+        /**
+         * 중복서브밋 방지
+         * 
+         * @returns {Boolean}
+         */        
+        function doubleSubmitCheck(){
+            if(doubleSubmitFlag){
+                return doubleSubmitFlag;
+            }else{
+                doubleSubmitFlag = true;
+                return false;
+            }
+        }
+        
+        
         function fn_openMsgWrite(){
             var comSubmit = new ComSubmit();
             comSubmit.setUrl("<c:url value='/admin/messageWrite.do' />");
@@ -108,8 +142,57 @@
             comSubmit.addParam("currentPageNo", pageNo);
             comSubmit.submit();
         }
+        function fn_move(){
+        	 var elem = document.getElementById("reloadMessage");
+             var elemState = document.getElementById("reloadMessageState");   
+             var elemStateBar = document.getElementById("reloadMessageStateBar");
+             var width = 1;                           
+             var id = setInterval(frame, 20);
+             function frame() {
+                 if (width >= 100) {                	                 	 
+                     clearInterval(id);
+                 } else {
+                     width++; 
+                     if(width%20 == 0){
+                    	 $('.progress .progress-bar').css('width', width+'%').attr('aria-valuenow', width);                       
+                         elemState.textContent = width + '% Complete';
+                         elemStateBar.textContent = width + '% Complete';
+                     }
+                 }                     
+             }
+        	
+        }
         
-       
+        function fn_reloadMessage(){
+        	
+        	
+        	/* 
+        	1. 성공일 경우 : success > complete > done > always
+			2. 실패일 경우 : error > complete > fail > always				
+			출처: http://doolyit.tistory.com/20 [동해둘리의 IT Study]
+        	*/
+        	$.ajax({
+        		url: "<c:url value='/admin/reloadmsg'/>",
+        		type: "post",
+        		data: {},
+        		contentType: "application/json",
+        		success:function(data){
+        			if(data.result){        				
+        				return true;
+        			}
+        		},
+        		error:function(data){
+        			alert(data);
+        		},
+        		complete : function () {   // 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
+        			 $('.progress .progress-bar').css('width', '0%').attr('aria-valuenow', 0);
+        		}
+
+        	})
+        	.done(function(){ console.log("done"); fn_move(); doubleSubmitFlag = false;})
+        	.fail(function(){ console.log("fail"); })
+        	.always(function(){ console.log("always"); });
+        }
     </script>
 </body>
 </html>

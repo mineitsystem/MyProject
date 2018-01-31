@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import first.common.dto.CommandMap;
+import first.common.util.CommonUtils;
 import first.common.util.ScreenResolver;
 import first.message.service.MessageService;
 
 @Controller
 @RequestMapping(value="/admin")
-public class AdminController {
+public class AdminController extends CommonUtils{
 	
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -57,6 +58,14 @@ public class AdminController {
     	ModelAndView mv = new ModelAndView("forward:/admin/message");
     	messageService.insertMsg(commandMap.getMap());        	    		    	    	   
     	return mv;
+    }
+	
+	@RequestMapping(value= {"/reloadmsg","/reloadmsg.do"})
+    public ModelAndView reloadMsg(ModelAndView model) throws Exception{		    	
+		reloadMessage();  
+		model.setViewName("jsonView");
+		model.addObject("result", true);		
+    	return model;
     }
 	
 }

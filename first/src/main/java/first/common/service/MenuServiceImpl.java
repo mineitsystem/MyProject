@@ -16,7 +16,7 @@ public class MenuServiceImpl extends BaseService implements MenuService {
     private MenuDAO mDao;
 
 	@Override
-	public List<Map<String, Object>> listLeftMenu(List<Map<String, Object>> map) throws Exception {
+	public List<Map<String, Object>> listLeftMenu(Map<String, Object> map) throws Exception {
 		
 		return mDao.listLeftMenu(map);
 	}

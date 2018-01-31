@@ -14,8 +14,7 @@ public class FinalValues {
     // Server 최대 Session 유지 시간 - 초 단위
     public static final int SERVER_MAX_INACTIVE_INTERVAL = 30 * 60;
     
-    public final static String COMM_USER_KEY     = "USER_INFO";
-    public final static String COMM_USER_AUTH    = "USER_AUTH";
+    public final static String COMM_USER_KEY     = "USER_INFO";    
     
     
     /*

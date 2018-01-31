@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -30,6 +31,8 @@ import first.common.service.ShaEncoder;
 import first.common.service.UserService;
 import first.common.util.FinalValues;
 import first.common.util.ScreenResolver;
+import first.common.util.UserInfoContext;
+import first.common.util.WebContext;
 
 @Controller
 @RequestMapping(value="/login")
@@ -46,8 +49,14 @@ public class LoginController {
 	private ShaEncoder encoder;
 	
 	@RequestMapping(value= {"/login","/login.do"})
-    public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv, String result) throws Exception{
-		mv.setViewName("/login/login");
+    public ModelAndView openTilesView(CommandMap commandMap, ModelAndView mv, String result, HttpServletRequest request,
+    		   HttpServletResponse response) throws Exception{
+		WebContext.set(request, response);		
+		if(UserInfoContext.getUserId()!=null && !UserInfoContext.getUserId().isEmpty()) {
+			mv.setViewName("redirect:/main/main");		
+		}else {
+			mv.setViewName("/login/login");
+		}		
 		mv.addObject("result", result);
     	return mv;
     }
@@ -80,8 +89,7 @@ public class LoginController {
 	    	    		if("1".equals(resultPassMap.get("PASSCNT").toString())){//비밀번호 일치	    	    			
 	    	    			
     	    				HttpSession session = request.getSession(true);	            	        	
-        	        		session.removeAttribute(FinalValues.COMM_USER_KEY);
-        	    			session.removeAttribute(FinalValues.COMM_USER_AUTH);
+        	        		session.removeAttribute(FinalValues.COMM_USER_KEY);        	    			
         	    			session.invalidate();
             	    									
         	    			session = request.getSession(true);

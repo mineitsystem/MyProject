@@ -23,9 +23,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
 		logger.info("Logout from: " + refererUrl);
 		HttpSession session  = request.getSession(true);
 		
-		if(session.getAttribute("LEFT_MENU") != null) {
-			session.removeAttribute("LEFT_MENU");
-		}
+		session.invalidate();
 		
 		response.sendRedirect(request.getContextPath()+"/");
 	}

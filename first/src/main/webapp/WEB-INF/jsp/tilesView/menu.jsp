@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  
 <div class="navbar-default sidebar" role="navigation">						
                 <div class="sidebar-nav navbar-collapse">
@@ -17,26 +19,30 @@
                             	</span>
                             </div>
                             <!-- /input-group -->
+                            ${sessionScope.USER_INFO.USER_ID}
                         </li>
                         <c:forEach var="main" items="${LEFT_MENU}">                          	              	 
                                 <c:if test="${main.MENU_IDX eq 0}">
                                 	<li>
 	                                	<!--메인  -->	                                	
-	                                	<a href="<c:url value='${main.LINK}'/>"  class="${fn:startsWith(requestURI, main.MENU_POINT) ? 'active' : '' }"><i class="${main.ICON}"></i> ${main.MENU_NAME}
+	                                	<a href="<c:url value='${main.LINK}'/>"  class="${fn:startsWith(requestURI, main.MENU_POINT) && main.SUBMENU_CNT < 0 ? 'active' : '' }"><i class="${main.ICON}"></i> ${main.MENU_NAME}
 	                                		<c:if test="${main.SUBMENU_CNT > 0}">	                                		 
 	                                			<!-- 서브 메뉴 존재 여부  -->
 	                                			<span class="fa arrow"></span>
 	                                		</c:if>
 	                                	</a>
+	                                	
 	                                	<c:set var="MENU_POINT_SUB" value="${main.MENU_POINT_SUB}"/>
-                                	    <c:if test="${main.SUBMENU_CNT > 0}"> 
-                                	    	                             	
+	                                	
+                                	    <c:if test="${main.SUBMENU_CNT > 0}">                                 	    	                             
                                 	    	<!--${fn:startsWith(fn:split(requestURI,'/')[1], MENU_POINT_SUB) ? 'collapse in' : '' }  -->                             	    	  
 	                                	    <ul class="nav nav-second-level">	                                	                           
-			                                	<c:forEach var="sub1" items="${LEFT_MENU}">				                        		
+			                                	<c:forEach var="sub1" items="${LEFT_MENU}">
+			                                					                        		
 						                        		<c:if test="${main.PARENT_IDX eq sub1.PARENT_IDX and sub1.MENU_IDX eq 1}"> 					                        			
-					                        				<li>					                        										                        					
-						                                    	<a href="<c:url value='${sub1.LINK}'/>"  class="${fn:startsWith(requestURI, sub1.MENU_POINT) ? 'active' : '' }">${sub1.MENU_NAME}
+					                        				<li>
+					                        					<!-- class="${fn:startsWith(requestURI, sub1.MENU_POINT) ? 'active' : '' }"  -->					                        										                        					
+						                                    	<a href="<c:url value='${sub1.LINK}'/>"  >${sub1.MENU_NAME}
 						                                    		<c:if test="${sub1.SUBMENU_CNT > 0}">
 							                                			<!-- 서브의 서브 메뉴 존재 여부  -->
 							                                			<span class="fa arrow"></span>
@@ -53,18 +59,19 @@
 									                        					<!-- 두번째 서브  -->				                        														                                    										                                   
 										                                        <li>
 										                                            <a href="<c:url value='${sub2.LINK}'/>">${sub2.MENU_NAME}</a>
-										                                        </li>								                                      
-												                                    							                                    								                               							                        					
-									                        				</c:if>
-									                        				
+										                                        </li>								                                      												                                    							                                    								                               							                        			
+									                        				</c:if>									                        				
 									                       				</c:forEach>							                       				
 								                       				</ul>	
 							                                	</c:if>           			    
 						                       				 </li>			                        			
-						                        		</c:if>				                        		                    
+						                        		</c:if>	
+						                        					                        		                    
 				                        		</c:forEach> 
 			                        		</ul>
+			                        		
                                 	    </c:if> 
+                                	    
 	                        		</li>
                                 </c:if>               		                        	                         	                        	                     
                         </c:forEach>                     

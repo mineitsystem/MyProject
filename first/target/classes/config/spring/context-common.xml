@@ -63,4 +63,15 @@
         <property name="maxUploadSize" value="100000000" />
         <property name="maxInMemorySize" value="100000000" />
     </bean>
+    
+    <bean id="messageSource" class="first.common.util.DatabaseMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="0" />
+        <property name="fallbackToSystemLocale" value="false" />
+        <constructor-arg ref="messageResourceService" />
+    </bean>
+
+    <bean id="messageSourceManagement" class="first.common.util.MessageSourceManagement">
+        <property name="databaseMessageSource" ref="messageSource" />
+    </bean>
 </beans>

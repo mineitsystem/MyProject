@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,9 +40,11 @@
     </sec:authorize>
 
     <!-- 여러 권한 체크 -->
-    <%-- <sec:authorize ifAnyGranted="ROLE_USER, ROLE_ADMIN">
+    <%-- 
+    <sec:authorize ifAnyGranted="ROLE_USER, ROLE_ADMIN">
         일반,관리자 모두
-    </sec:authorize> --%>   
+    </sec:authorize> 
+    --%>   
     <!-- /.dropdown -->
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">

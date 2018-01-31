@@ -9,7 +9,7 @@
 	         	   PASS,
 	         	   EMAIL,
 	         	   PASS_ERR,
-	         	   AUTH FROM 
+	         	   AUTHORITY FROM 
 	         	   TB_USER
 	         	   WHERE 1=1
 	    ]]>    	   
@@ -50,10 +50,9 @@
 	         	   WHERE 1=1	         	   
 	         	   
 	    ]]>    	   
-       	<if test="!@first.common.util.MyComparator@isEmpty(password)">
+       	<if test="!@first.common.util.MyComparator@isEmpty(id)">
 			<![CDATA[
-				AND USER_ID = #{id}
-				AND PASS = #{password}
+				AND USER_ID = #{id}				
 			]]>
 		</if>	    
   

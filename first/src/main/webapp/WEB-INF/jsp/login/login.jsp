@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <body>
 	 <div class="container">
@@ -34,7 +36,7 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </fieldset>
                             <fieldset id="login_fail" style="display:none">
-                                <div class="form-group">
+                                <div class="form-group" id="errerMessage">
                                     	로그인 실패
                                 </div>                                                             
                                 <input type="button" class="btn btn-lg btn-success btn-block" id="reLogin" value="reLogin"/><br/>    
@@ -303,10 +305,11 @@
 	
 	//최종실행
 	$(document).ready(function(){
-		var login_type = "${result}";
+		var login_type = "${errresult}";		
 		if(login_type){
 			$("#login_fail").css("display","");
-			$("#login_success").css("display","none");
+			$("#login_success").css("display","none");						
+			$("#errerMessage").html("<spring:message code='${errmessage}'/>");
 		}
 		 // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var userInputId = getCookie("userInputId");

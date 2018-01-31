@@ -20,6 +20,17 @@
 		]]>
 		<include refid="common.pagingPost"/> 
 	</select>
+	
+	<select id="selectMsg" parameterType="bMap" resultType="bMap">		
+		<![CDATA[
+			SELECT             
+                    A.MSG_ID
+                ,   IFNULL(MAX(CASE WHEN A.MSG_LANG = 'KO' THEN A.MSG_NM END), ' ') AS KO_MSG
+                ,   IFNULL(MAX(CASE WHEN A.MSG_LANG = 'EN' THEN A.MSG_NM END), ' ') AS EN_MSG           
+             FROM   TB_MSG A                            
+            GROUP BY A.MSG_ID            
+		]]>		
+	</select>
 		
 	<select id="selectMsgDetail" parameterType="hashmap" resultType="hashmap">
 	    <![CDATA[

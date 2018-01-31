@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface MenuService {
 	
-	public List<Map<String, Object>> listLeftMenu(List<Map<String, Object>> map) throws Exception;
+	public List<Map<String, Object>> listLeftMenu(Map<String, Object> map) throws Exception;
 	
 }

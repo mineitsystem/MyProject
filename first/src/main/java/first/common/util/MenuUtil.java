@@ -1,5 +1,7 @@
 package first.common.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,14 +21,16 @@ public class MenuUtil {
         }
     }
     
-    public static String getMenuList(List<Map<String, Object>> map) {
+    @SuppressWarnings("rawtypes")
+	public static String getMenuList(List<Map<String, Object>> map) {
     	
         List<?> menuList = null;
         StringBuffer menusb = new StringBuffer();
         /**/       
         try {        
             // LEFT 메뉴조회
-            menuList = service.listLeftMenu(map);
+            //menuList = service.listLeftMenu(map);
+            menuList = new ArrayList();
             int menuSize = 0;
             
             menusb.append("<div id='_LEFT_MENU_' class='basic'>");

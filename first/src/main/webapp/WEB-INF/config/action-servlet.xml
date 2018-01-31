@@ -48,7 +48,9 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
     
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
-    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+    	<property name="contentType" value="application/json;charset=UTF-8"/>
+    </bean>    
     
     
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">

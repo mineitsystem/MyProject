@@ -3,6 +3,8 @@
  
 <mapper namespace="menu">
  	<select id="selectMenuList" parameterType="hashmap" resultType="hashmap">
+ 		
+ 			
 	    <![CDATA[
 	        SELECT
 	           A.IDX, 
@@ -17,14 +19,25 @@
 	           A.USE_YN,
 	           SUBSTRING_INDEX(LINK ,'/',2)  AS MENU_POINT,
 	           CASE WHEN MENU_IDX > 0 THEN SUBSTRING_INDEX(SUBSTRING_INDEX(LINK ,'/',3) ,'/',-1)  ELSE NULL END AS MENU_POINT_SUB,	           
-               (SELECT COUNT(*) FROM TB_MENU B WHERE A.PARENT_IDX = B.PARENT_IDX AND A.MENU_IDX < B.MENU_IDX) AS SUBMENU_CNT
+               (SELECT COUNT(*) FROM TB_MENU B WHERE A.PARENT_IDX = B.PARENT_IDX AND A.MENU_IDX < B.MENU_IDX) AS SUBMENU_CNT,
+               A.AUTHORITY
 	        FROM
 	            TB_MENU A
 	        WHERE
-	       		USE_YN = 'Y'
+	        	1=1
+	        AND
+	       		A.USE_YN = 'Y'
+	   ]]>	   
+  	    <if test='ISADMIN != null and ISADMIN != true'>
+	  	    <![CDATA[
+	  	    	AND A.AUTHORITY NOT LIKE '%ADMIN%'  
+	  	    ]]>
+  	    </if>
+	   <![CDATA[     		
 	       	ORDER BY 
 	       		PARENT_IDX,
 	       		MENU_IDX
 	    ]]>
+	    
 	</select>	
 </mapper>

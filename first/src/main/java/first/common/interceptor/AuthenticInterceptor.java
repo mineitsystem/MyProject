@@ -29,6 +29,7 @@
 package first.common.interceptor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -46,6 +47,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import first.common.util.FinalValues;
 import first.common.util.MenuUtil;
+import first.common.util.UserInfoContext;
 import first.common.util.WebContext;
 import first.common.listener.SessionHelperListener;
 import first.common.service.MenuService;
@@ -133,7 +135,8 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav)
             throws Exception {
         String requestURI = request.getRequestURI();
@@ -156,17 +159,21 @@ public class AuthenticInterceptor extends HandlerInterceptorAdapter {
             else
                 contentType = contentType.toLowerCase();                                  
             
-            List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map = new HashMap<String, Object>();
         	String[] menu_point =  requestURI.split("/");    
         	if(mav !=null) {
+        		map.put("ISADMIN",false);
+        		
         		if(session.getAttribute("LEFT_MENU") == null) {
+        			if(UserInfoContext.getAuth().equals("ROLE_ADMIN")) {
+        				map.put("ISADMIN",true);        				
+        			}
+        			        			
         			session.setAttribute("LEFT_MENU", service.listLeftMenu(map));
-        		}else {
-        			mav.addObject("LEFT_MENU", session.getAttribute("LEFT_MENU"));
         		}
-        		        		        		           
-            	mav.addObject("MENU_POINT", menu_point);
-            	//menu_point[2].toUpperCase().contains("BOARD");
+        		
+        		mav.addObject("LEFT_MENU", session.getAttribute("LEFT_MENU"));        		
+        		mav.addObject("MENU_POINT", menu_point);
             	mav.addObject("contextPath",contextPath);
             	mav.addObject("requestURI",requestURI);
         	
