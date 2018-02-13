@@ -61,7 +61,7 @@ public class CommnunityController {
 	
 	@RequestMapping(value="/insertBoard.do")
 	public ModelAndView insertBoard(CommandMap commandMap, HttpServletRequest request) throws Exception{
-	    ModelAndView mv = new ModelAndView("forward:/community/openBoardList.do");
+	    ModelAndView mv = new ModelAndView("redirect:/community/openBoardList.do");
 	     
 	    communityService.insertBoard(commandMap.getMap(), request);
 	     
@@ -81,7 +81,7 @@ public class CommnunityController {
 	
 	@RequestMapping(value="/updateBoard.do")
 	public ModelAndView updateBoard(CommandMap commandMap, HttpServletRequest request) throws Exception{
-	    ModelAndView mv = new ModelAndView("forward:/community/openBoardDetail.do");
+	    ModelAndView mv = new ModelAndView("redirect:/community/openBoardDetail.do");
 	     
 	    communityService.updateBoard(commandMap.getMap(), request);
 	     

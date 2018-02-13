@@ -95,24 +95,37 @@
 	    ]]>
 	</insert>
 	
-	<update id="updateMsg" parameterType="hashmap">
+	<update id="updateMsgKO" parameterType="hashmap">
 	    <![CDATA[
-	        UPDATE TB_BOARD
+	        UPDATE TB_MSG
 	        SET
-	            TITLE = #{TITLE},
-	            CONTENTS = #{CONTENTS}
+	            MSG_NM = #{KO_MSG}
 	        WHERE
-	            IDX = #{IDX}   
+	            MSG_ID = #{MSG_ID}
+	        AND MSG_LANG = 'KO'    
+	    ]]>
+	</update>
+	
+	<update id="updateMsgEN" parameterType="hashmap">
+	    <![CDATA[
+	        UPDATE TB_MSG
+	        SET
+	            MSG_NM = #{EN_MSG}
+	        WHERE
+	            MSG_ID = #{MSG_ID}
+	        AND MSG_LANG = 'EN'   
 	    ]]>
 	</update>
 	
 	<update id="deleteMsg" parameterType="hashmap">
 	    <![CDATA[
-	        UPDATE TB_BOARD
-	        SET
-	            DEL_GB = 'Y'
-	        WHERE
-	            IDX = #{IDX}
+	        DELETE FROM 
+	        	TB_MSG 	       
+	        WHERE 
+	        	1=1 
+	          AND
+	        	MSG_ID = #{MSG_ID}
+	        
 	    ]]>
 	</update>
 		

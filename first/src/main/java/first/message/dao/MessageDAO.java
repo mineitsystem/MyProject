@@ -20,6 +20,18 @@ public class MessageDAO extends AbstractDAO{
 	public void insertMsgList(Map<String, Object> map) {
 		insert("admin.insertMsgKO", map);
 		insert("admin.insertMsgEN", map);		
+	}
+
+	@Transactional
+	public void editMsgItem(Map<String, Object> map) {
+		update("admin.updateMsgKO", map);
+		update("admin.updateMsgEN", map);
+		
+	}
+
+	public void deleteMsgItem(Map<String, Object> map) {
+		update("admin.deleteMsg", map);
+		
 	}	
 
 }

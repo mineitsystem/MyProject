@@ -34,5 +34,17 @@ public class MessageServiceImpl extends BaseService implements MessageService{
 	public void insertMsg(Map<String, Object> map) throws Exception {
 		messageDAO.insertMsgList(map);		
 	}
+
+	@Override
+	public void editMsg(Map<String, Object> map) throws Exception {
+		messageDAO.editMsgItem(map);		
+		
+	}
+
+	@Override
+	public void deleteMsg(Map<String, Object> map) throws Exception {
+		messageDAO.deleteMsgItem(map);	
+		
+	}
 		
 }

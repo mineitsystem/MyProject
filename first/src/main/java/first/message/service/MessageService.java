@@ -8,6 +8,10 @@ public interface MessageService {
 
 	Map<String, Object> selectMsgList(Map<String, Object> map) throws Exception;
 
-	void insertMsg(Map<String, Object> map) throws Exception;	
+	void insertMsg(Map<String, Object> map) throws Exception;
+
+	void editMsg(Map<String, Object> map) throws Exception;
+
+	void deleteMsg(Map<String, Object> map) throws Exception;	
 
 }
