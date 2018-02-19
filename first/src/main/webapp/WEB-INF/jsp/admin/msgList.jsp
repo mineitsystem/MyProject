@@ -154,6 +154,7 @@
 	<%@ include file="/WEB-INF/include/include-body.jspf" %>
     <script type="text/javascript">
     	var doubleSubmitFlag = false;
+    	var udType;
     	
     	 validationChk = function(){
 
@@ -171,7 +172,7 @@
  	        }
  						
  	        return true;		
- 		}
+ 		}    	     
     	
         $(document).ready(function(){
         	$(".progress-bar").animate({
@@ -183,8 +184,7 @@
             });
             
             $("#reloadMsg").on("click", function(e) { 
-            	e.preventDefault();
-            	if(doubleSubmitCheck()) return;          
+            	e.preventDefault();            	      
             	fn_reloadMessage();
             });
             
@@ -198,33 +198,35 @@
     	    	$("#modal_msg_content").modal("toggle");
     	    });
             
-            $("#modal_msg_edit").click(function(e){
-            	e.preventDefault();
-            	if(!validationChk())return;
-            	fn_openMsgEdit();            	
+            $("#modal_msg_edit").click(function(e){            	
+            	e.preventDefault(); 
+            	$("#modal_msg_content").modal("toggle");
+            	modalAlert("확인","메시지를 수정하시겠습니까?","confirm");	
+            	udType ="U";
+            	
             });
             
 			$("#modal_msg_delete").click(function(e){	
-				e.preventDefault();		
-				fn_openMsgDelete();
+				e.preventDefault();	
+				$("#modal_msg_content").modal("toggle");
+				modalAlert("확인","메시지를 삭제하시겠습니까?","confirm");	
+				udType ="D";
             });
-                     
+			
+			$("#modal_confirm_click").on("click", function(e){
+				e.preventDefault();		
+				if(udType != undefined){
+					if(udType === "U"){
+						
+						fn_openMsgEdit(); 
+						
+					}else if(udType === "D"){
+						
+						fn_openMsgDelete();    
+					}
+				}								
+			});  
         });
-         
-        /**
-         * 중복서브밋 방지
-         * 
-         * @returns {Boolean}
-         */        
-        function doubleSubmitCheck(){
-            if(doubleSubmitFlag){
-                return doubleSubmitFlag;
-            }else{
-                doubleSubmitFlag = true;
-                return false;
-            }
-        }
-        
         
         function fn_openMsgWrite(){
             var comSubmit = new ComSubmit();

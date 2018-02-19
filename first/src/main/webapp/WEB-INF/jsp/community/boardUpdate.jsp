@@ -75,6 +75,7 @@
     
     	var gfv_count = '${fn:length(list)+1}';
         $(document).ready(function(){
+        	
             $("#list").on("click", function(e){ //목록으로 버튼
                 e.preventDefault();
                 fn_openBoardList();
@@ -89,6 +90,7 @@
                 e.preventDefault();
                 fn_deleteBoard();
             });
+            
             $("#addFile").on("click", function(e){ //파일 추가 버튼
                 e.preventDefault();
                 fn_addFile();

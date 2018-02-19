@@ -53,6 +53,13 @@ public class AdminController extends CommonUtils{
     	return mv;
     }
 	
+	@RequestMapping(value= {"/insertMsg","/insertMsg.do"})
+    public ModelAndView insertMsg(CommandMap commandMap) throws Exception{		
+    	ModelAndView mv = new ModelAndView("redirect:/admin/message");
+    	messageService.insertMsg(commandMap.getMap());        	    		    	    	   
+    	return mv;
+    }
+	
 	@RequestMapping(value= {"/messageEdit","/messageEdit.do"})
     public ModelAndView messageEdit(CommandMap commandMap) throws Exception{		
     	ModelAndView mv = new ModelAndView("redirect:/admin/message");

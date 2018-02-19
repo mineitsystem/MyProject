@@ -19,7 +19,7 @@
                             	</span>
                             </div>
                             <!-- /input-group -->
-                            ${sessionScope.USER_INFO.USER_ID}
+                            <%-- ${sessionScope.USER_INFO.USER_ID} --%>
                         </li>
                         <c:forEach var="main" items="${LEFT_MENU}">                          	              	 
                                 <c:if test="${main.MENU_IDX eq 0}">

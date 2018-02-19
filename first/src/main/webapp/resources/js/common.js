@@ -690,7 +690,6 @@ function removeClass(selector, myClass) {
 	  }
 }
 
-
 function modalAlert(title,body,state){
 	
 	var modalState = "alert-";
@@ -713,13 +712,27 @@ function modalAlert(title,body,state){
 	
 	}
 	
-	document.getElementById("modal_title").innerHTML = title;
-	document.getElementById("modal_body").innerHTML = body;		
+	var modal_title,model_body,modal_content;
+	
+	if(state === "confirm"){		
+		modal_title   = "modal_confirm_title";
+		model_body    = "modal_confirm_body";
+		modal_content = "modal_confirm_content";		
+	}else{
+		modal_title   = "modal_title";
+		model_body    = "modal_body";
+		modal_content = "modal_content";
+	}
+	
+	document.getElementById(modal_title).innerHTML = title;
+	document.getElementById(model_body).innerHTML = body;		
 	addClass(document.getElementsByClassName("modal-header")[0],modalState);
 	document.getElementsByClassName("modal-content")[0].style.width = "60%";
-	document.getElementsByClassName("modal-content")[0].style.marginLeft = "20%";	
+	document.getElementsByClassName("modal-content")[0].style.marginLeft = "20%";
+	document.getElementsByClassName("modal-content")[1].style.width = "60%";
+	document.getElementsByClassName("modal-content")[1].style.marginLeft = "20%";	
 	
-	$("#modal_content").modal('show');
+	$("#"+modal_content).modal('show');
 }
 
 function gfn_isNull(str) {
