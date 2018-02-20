@@ -217,11 +217,8 @@
 				e.preventDefault();		
 				if(udType != undefined){
 					if(udType === "U"){
-						
 						fn_openMsgEdit(); 
-						
-					}else if(udType === "D"){
-						
+					}else if(udType === "D"){						
 						fn_openMsgDelete();    
 					}
 				}								
