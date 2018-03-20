@@ -48,6 +48,17 @@
 	<%-- <script src="<c:url value='/js/jquery.min.js'/>"></script> --%>
 	<script src="<c:url value='/js/common.js'/>" charset="utf-8"></script>
 	
+	<!-- include summernote css/js-->
+	<link href="<c:url value='/vendor/summernote/summernote.css'/>" rel="stylesheet"/>
+	<script src="<c:url value='/vendor/summernote/summernote.js'/>"></script>
+	
+	<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/vendor/summernote/lib/codemirror.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value='/vendor/summernote/lib/monokai.css'/>"/>
+	<script type="text/javascript" src="<c:url value='/vendor/summernote/lib/codemirror.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/vendor/summernote/lib/xml.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/vendor/summernote/lib/formatting.js'/>"></script>
+		
 	<script type="text/javascript">				
 		$(document).ready(function(){
 		 	$('.btn').on('click', function() {

@@ -28,7 +28,7 @@
 	                    </div>
 	                    <div class="panel-body">
 	                        <div class="form-group">   
-	                        	<textarea rows="20" cols="100" class="form-control"  id="CONTENTS" name="CONTENTS" >${map.CONTENTS }</textarea>                                                     
+	                        	<textarea class="form-control"  id="CONTENTS" name="CONTENTS" >${map.CONTENTS }</textarea>                                                     
 	                        </div>
 	                    </div>
 		                    <div class="panel-footer">	                    	
@@ -104,6 +104,16 @@
                 e.preventDefault();
                 fn_deleteFile($(this));
             });
+            
+            $("#CONTENTS").summernote({
+                height: 500,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                //focus: true                  // set focus to editable area after initializing summernote
+                codemirror: { // codemirror options
+				    theme: 'monokai'
+				 }
+        	 });
         });
          
         function fn_openBoardList(){
