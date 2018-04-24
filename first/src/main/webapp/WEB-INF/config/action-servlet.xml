@@ -16,7 +16,7 @@
        http://www.springframework.org/schema/aop 
        http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/security 
-       http://www.springframework.org/schema/security/spring-security.xsd">
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	
 	<mvc:resources mapping="/css/**" location="/resources/css/" />

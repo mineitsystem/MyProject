@@ -65,12 +65,8 @@ implements AuthenticationSuccessHandler{
 				logger.info(auth.getPrincipal().toString());
 				logger.info(u.getEmail().toString());
 				 
-				HttpSession session = request.getSession(false);	            	        	
+				HttpSession session = request.getSession(true);	            	        	
 				session.removeAttribute(FinalValues.COMM_USER_KEY);	//유저 정보 초기화	
-				//session.invalidate();
-				
-											
-				session = request.getSession(true);
 				
 				//사용자 정보 세션처리
 				SessionBox sBox = new SessionBox(session, FinalValues.COMM_USER_KEY);

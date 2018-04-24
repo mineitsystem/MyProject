@@ -30,8 +30,7 @@
 			authentication-success-handler-ref="userLoginSuccessHandler"
 			authentication-failure-handler-ref="userLoginFailureHandler"/>				
 		 <access-denied-handler ref="userLoginDiniedHandler"/>	
-		 <logout delete-cookies="true" success-handler-ref="userLogoutSuccessHandler" invalidate-session="true" /> 
-		 
+		 <logout delete-cookies="true" success-handler-ref="userLogoutSuccessHandler" invalidate-session="true" /> 		 
 	</http>
 	
 	<authentication-manager>

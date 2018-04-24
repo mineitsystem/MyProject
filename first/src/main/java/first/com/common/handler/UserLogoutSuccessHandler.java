@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import first.common.util.FinalValues;
+
 public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	Logger logger = Logger.getLogger(this.getClass());
@@ -22,7 +24,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
 		String refererUrl = request.getHeader("Referer");
 		logger.info("Logout from: " + refererUrl);
 		HttpSession session  = request.getSession(true);
-		
+		session.removeAttribute(FinalValues.COMM_USER_KEY);
 		session.invalidate();
 		
 		response.sendRedirect(request.getContextPath()+"/");

@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import first.common.dto.SessionBox;
@@ -70,17 +71,17 @@ public class LoginController {
     	String LoginType = FinalValues.LOGIN_TYPE;
 		String LoginMsg = FinalValues.LOGIN_MSG;
     	try {
-    			
-    			
+    		    /*
+ 		        |--------|----------|-----|-------------------|---------|-----|
+ 				|USER_ID |USER_NAME |PASS |EMAIL              |PASS_ERR |AUTH |
+ 				|--------|----------|-----|-------------------|---------|-----|
+ 				|admin   |태산             |1    |ehdehd16@naver.com |0        |S    |
+ 				|--------|----------|-----|-------------------|---------|-----|
+ 		        */
+    			/*
     		    Map<String,Object> resultInfoMap = loginService.getLoginInfo(commandMap.getMap()); 
     		    boolean pass_err = false;
-	    		   /*
-	    		    *   |--------|----------|-----|-------------------|---------|-----|
-	    				|USER_ID |USER_NAME |PASS |EMAIL              |PASS_ERR |AUTH |
-	    				|--------|----------|-----|-------------------|---------|-----|
-	    				|admin   |태산             |1    |ehdehd16@naver.com |0        |S    |
-	    				|--------|----------|-----|-------------------|---------|-----|
-	    		    * */
+	    		  
     	    	
     	    	if(resultInfoMap != null) {
     	    		Map<String,Object> resultPassMap = loginService.getLoginPass(commandMap.getMap()); 
@@ -126,7 +127,7 @@ public class LoginController {
     	    		mv.addObject(LoginMsg, FinalValues.LOGIN_MSG_2);    	    		
     	    	}
     	    	
-    	    	
+    	    	*/
     		
     	}catch(Exception ex) {//쿼리 에러    		
     		mv.addObject(LoginType, 5);
@@ -156,7 +157,7 @@ public class LoginController {
     	return mv;
     }
 	
-	@RequestMapping(value= "/checkAuth")
+	@RequestMapping(value= "/checkAuth", method = RequestMethod.GET)
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
     public ModelAndView checkAuth(CommandMap commandMap, ModelAndView mv, Authentication auth) throws Exception{
 		mv.setViewName("checkAuth");
